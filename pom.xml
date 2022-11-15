@@ -5,9 +5,9 @@
     <packaging>pom</packaging>
     <modules>
         <module>managercore</module>
-		<module>frontend</module>
-		<module>gateway</module>
-		<module>auth</module>
+		<module>managerfront</module>
+		<module>managerauth</module>
+		<module>managergateway</module>
 	</modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>
