@@ -1,2 +1,2 @@
-# work_task_manager
+# Worktask Manager
 Web-сервис для управления рабочим временем сотрудников
