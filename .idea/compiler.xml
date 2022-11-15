@@ -7,15 +7,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="managerauth" />
-        <module name="managerfront" />
         <module name="managergateway" />
+        <module name="managercore" />
+        <module name="managerfront" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="auth" target="11" />
       <module name="frontend" target="11" />
       <module name="gateway" target="11" />
-      <module name="managercore" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
