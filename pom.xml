@@ -18,7 +18,7 @@
 	<groupId>ru.gb.worktaskmanager</groupId>
 	<artifactId>worktaskmanager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>worktaskmanager</name>
+	<name>work_task_manager</name>
 	<description>Work Task Manager project</description>
 	<properties>
 		<java.version>11</java.version>
