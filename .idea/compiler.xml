@@ -7,8 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="managerauth" />
-        <module name="managergateway" />
         <module name="managerfront" />
+        <module name="managergateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
