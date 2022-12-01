@@ -5,10 +5,16 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.gb.worktaskmanager.managercore.dtos.TaskStatusDto;
 import ru.gb.worktaskmanager.managercore.dtos.TaskStatusListDto;
+import ru.gb.worktaskmanager.managercore.entites.TaskStatus;
 import ru.gb.worktaskmanager.managercore.services.TaskStatusService;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Контроллер статусов заданий
@@ -17,6 +23,11 @@ import ru.gb.worktaskmanager.managercore.services.TaskStatusService;
 @RequestMapping("/task_status")
 public class TaskStatusController {
     private TaskStatusService service;
+
+    @Autowired
+    private void setTaskStatusService(TaskStatusService service) {
+        this.service = service;
+    }
 
     @Operation(
             summary = "Получение всех статусов заданий",
@@ -28,8 +39,14 @@ public class TaskStatusController {
                     )
             }
     )
-    @Autowired
-    private void setTaskStatusService(TaskStatusService service) {
-        this.service = service;
+    @GetMapping()
+    public TaskStatusListDto getStatuses() {
+        List<TaskStatus> statuses = service.getTaskStatuses();
+
+        return new TaskStatusListDto(statuses
+                .stream()
+                .map(status -> new TaskStatusDto(status.getCode(), status.getTitle()))
+                .collect(Collectors.toList())
+        );
     }
 }
