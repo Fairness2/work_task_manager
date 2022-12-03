@@ -31,9 +31,9 @@ public class StringDateGreaterOrEqualsThenValidator implements ConstraintValidat
     @Override
     public boolean isValid(Object object, ConstraintValidatorContext constraintValidatorContext) {
         if (object instanceof String) {
-
+            return validateField(object);
         } else {
-
+            return validateClass(object);
         }
     }
 
@@ -66,6 +66,22 @@ public class StringDateGreaterOrEqualsThenValidator implements ConstraintValidat
     }
 
     private boolean validateField(String stringDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(this.format);
+        Date dateFrom;
+        Date dateTo;
+        try {
+            if (value == null || value.equals("")) {
+                dateFrom = new Date();
+            } else {
+                dateFrom = dateFormat.parse(value);
+            }
 
+            dateTo = dateFormat.parse(stringDate);
+        } catch (ParseException e) {
+            // Не удалось спарсить данные
+            return false;
+        }
+
+        return dateTo.getTime() >= dateFrom.getTime();
     }
 }

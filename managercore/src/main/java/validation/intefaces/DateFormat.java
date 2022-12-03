@@ -7,7 +7,7 @@ import javax.validation.Payload;
 import java.lang.annotation.*;
 
 /**
- * Аннотация валиадатора для проверки наличия такой категории.
+ * Аннотация валиадатора для проверки соответствия даты
  */
 @Documented
 @Constraint(validatedBy = DateFormatValidator.class)

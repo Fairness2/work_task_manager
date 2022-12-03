@@ -4,20 +4,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import validation.intefaces.DateFormat;
 import validation.intefaces.StringDateGreaterOrEqualsThan;
+import validation.intefaces.UserExist;
+import validation.intefaces.UserWithRole;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @StringDateGreaterOrEqualsThan.List({
         @StringDateGreaterOrEqualsThan(
-                field = "dateTo",
-                secondField = "dateFrom",
-                message = "Дата \"до\" не может быть меньше даты \"от\""
+                field = "planStartDate",
+                secondField = "planEndDate",
+                message = "Плановая дата начала не может быть меньше плановой даты завершения"
         )
 })
 public class RequestCreateTaskDto {
@@ -25,37 +26,37 @@ public class RequestCreateTaskDto {
     @NotBlank(message = "Заголовок не может быть пустым")
     private String title;
 
-    @Size(min = 2, max = 255, message = "Заголовок должнен содержать от 2-х до 255-и символов")
+    @Size(min = 2, message = "Описание должно содержать от 2-х символов")
     @NotBlank(message = "Заголовок не может быть пустым")
     private String description;
 
-    @UserExist //TODO валидатор
-    @WorkerExist //TODO валидатор
+    @UserExist(message = "Такого работника не существует")
+    @UserWithRole(role = "employer", message = "Работник не заявлен как работник")
     @NotNull(message = "Работник не может быть пустым")
-    private Integer employer_id;
+    private Integer employerId;
 
-    @UserExist //TODO валидатор
-    @BossExist //TODO валидатор
+    @UserExist(message = "Автора не существует")
+    @UserWithRole(role = "director", message = "Автор не заявлен как руководитель")
     @NotNull(message = "Автор не может быть пустым")
-    private Integer author_id; // TODO подставлять из принципала
+    private Integer authorId; // TODO подставлять из принципала
 
-    @UserExist //TODO валидатор
-    @WorkerExist //TODO валидатор
+    @UserExist(message = "Ответственного не существует")
+    @UserWithRole(role = "employer", message = "Ответственный не заявлен как работник")
     @NotNull(message = "Ответственный не может быть пустым")
-    private Integer responsible_user_id;
+    private Integer responsibleUserId;
 
     @Positive
-    @NotNull(message = "Ответственный не может быть пустым")
-    private Integer working_hours;
+    @NotNull(message = "Число рабочих числов должно быть заполнено")
+    private Integer workingHours;
 
     @DateFormat(format = "yyyy-MM-dd kk:mm")
-    @StringDateBigerThanNow //TODO валидатор
-    @NotNull(message = "Автор не может быть пустым")
-    private String plan_start_date;
+    @StringDateGreaterOrEqualsThan(format = "yyyy-MM-dd kk:mm")
+    @NotBlank(message = "Планируемая дата начала должна быть заполнена")
+    private String planStartDate;
 
     @DateFormat(format = "yyyy-MM-dd kk:mm")
-    @StringDateBigerThanNow //TODO валидатор
-    @NotNull(message = "Автор не может быть пустым")
-    private String plan_end_date;
+    @StringDateGreaterOrEqualsThan(format = "yyyy-MM-dd kk:mm")
+    @NotBlank(message = "Планируемая дата окончкания должна быть заполнена")
+    private String planEndDate;
 
 }

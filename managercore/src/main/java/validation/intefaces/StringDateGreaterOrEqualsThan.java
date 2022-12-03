@@ -18,10 +18,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface StringDateGreaterOrEqualsThan {
     String message() default "Первая дата меньше, чем вторая";
-    String field();
-    String secondField();
+    String field() default "";
+    String secondField() default "";
     String format() default "yyyy-MM-dd";
-    String value();
+    String value() default "";
 
     Class<?>[] groups() default {};
 

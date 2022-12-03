@@ -29,33 +29,36 @@ public class Task {
     private String description;
 
     @Column(name = "employer_id")
-    private String employer_id;
+    private String employerId;
 
     @Column(name = "author_id")
-    private String author_id;
+    private String authorId;
 
     @Column(name = "responsible_user_id")
-    private String responsible_user_id;
+    private String responsibleUserId;
 
     @Column(name = "working_hours")
-    private Integer working_hours;
+    private Integer workingHours;
 
     @Column(name = "plan_start_date")
-    private LocalDateTime plan_start_date;
+    private LocalDateTime planStartDate;
 
     @Column(name = "plan_end_date")
-    private LocalDateTime plan_end_date;
+    private LocalDateTime planEndDate;
 
     @CreationTimestamp
     @Column(name = "created_at")
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @UpdateTimestamp
     @Column(name = "updated_at")
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "task")
     private List<RefTaskStatus> taskStatuses;
+
+    @OneToMany(mappedBy = "task")
+    private List<File> files;
 
 
 }

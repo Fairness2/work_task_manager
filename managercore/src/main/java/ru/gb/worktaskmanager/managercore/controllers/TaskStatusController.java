@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  * Контроллер статусов заданий
  */
 @RestController
-@RequestMapping("/task_status")
+@RequestMapping("/task_statuses")
 public class TaskStatusController {
     private TaskStatusService service;
 
@@ -39,6 +39,10 @@ public class TaskStatusController {
                     )
             }
     )
+
+    /**
+     * Получение полного списка стаутусов
+     */
     @GetMapping()
     public TaskStatusListDto getStatuses() {
         List<TaskStatus> statuses = service.getTaskStatuses();

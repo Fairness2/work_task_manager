@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Валиадатор для проверки наличия такой категории.
+ * Валиадатор для проверки соответствия даты формату
  */
 public class DateFormatValidator implements ConstraintValidator<DateFormat, String> {
     private SimpleDateFormat dateFormat;

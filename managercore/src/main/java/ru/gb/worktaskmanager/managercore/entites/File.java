@@ -13,22 +13,32 @@ import java.time.LocalDateTime;
  */
 @Data
 @Entity
-@Table(name = "ref_task_status")
+@Table(name = "t_file")
 @NoArgsConstructor
-public class RefTaskStatus {
+public class File {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "title")
-    private String title;
     @ManyToOne
     @JoinColumn(name = "task_id", nullable = false)
     private Task task;
 
-    @ManyToOne
-    @JoinColumn(name = "status_code", nullable = false)
-    private TaskStatus status;
+    /*@ManyToOne
+    @JoinColumn(name = "comment_ id", nullable = false)
+    private Comment comment;*/
+
+    @Column(name = "user_id")
+    private Long userId;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "type")
+    private String type;
+
+    @Column(name = "file_id") //ID фалйа в медиасервисе
+    private String fileId;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -37,9 +47,6 @@ public class RefTaskStatus {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-    @Column(name = "ended_at")
-    private LocalDateTime endedAt;
 
 
 }
