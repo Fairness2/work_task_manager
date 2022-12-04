@@ -31,7 +31,7 @@ public class StringDateGreaterOrEqualsThenValidator implements ConstraintValidat
     @Override
     public boolean isValid(Object object, ConstraintValidatorContext constraintValidatorContext) {
         if (object instanceof String) {
-            return validateField(object);
+            return validateField((String) object);
         } else {
             return validateClass(object);
         }

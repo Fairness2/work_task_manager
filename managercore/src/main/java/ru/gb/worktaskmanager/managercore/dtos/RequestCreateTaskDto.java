@@ -16,8 +16,8 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @StringDateGreaterOrEqualsThan.List({
         @StringDateGreaterOrEqualsThan(
-                field = "planStartDate",
-                secondField = "planEndDate",
+                field = "planEndDate",
+                secondField = "planStartDate",
                 message = "Плановая дата начала не может быть меньше плановой даты завершения"
         )
 })
@@ -50,12 +50,12 @@ public class RequestCreateTaskDto {
     private Integer workingHours;
 
     @DateFormat(format = "yyyy-MM-dd kk:mm")
-    @StringDateGreaterOrEqualsThan(format = "yyyy-MM-dd kk:mm")
+    @StringDateGreaterOrEqualsThan(format = "yyyy-MM-dd kk:mm", message = "Планируемая дата начала должна быть больше текущей даты")
     @NotBlank(message = "Планируемая дата начала должна быть заполнена")
     private String planStartDate;
 
     @DateFormat(format = "yyyy-MM-dd kk:mm")
-    @StringDateGreaterOrEqualsThan(format = "yyyy-MM-dd kk:mm")
+    @StringDateGreaterOrEqualsThan(format = "yyyy-MM-dd kk:mm", message = "Планируемая дата окончкания должна быть больше текущей даты")
     @NotBlank(message = "Планируемая дата окончкания должна быть заполнена")
     private String planEndDate;
 
