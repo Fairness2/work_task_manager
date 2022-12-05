@@ -48,5 +48,20 @@ public class File {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    /**
+     * Сделаем ссылку на сервис файлов
+     * @return String
+     */
+    public String getLink() {
+        //TODO взять из конфига
+        String serviceLink = "http://localhost:8945/file_manager";
+        String fileUrl = "/files";
+        return new StringBuilder(serviceLink)
+                .append(fileUrl)
+                .append("/")
+                .append(this.fileId)
+                .toString();
+    }
+
 
 }
