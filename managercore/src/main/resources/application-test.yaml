@@ -2,14 +2,30 @@ server:
   port: 8189
   servlet:
     context-path: /manager-core
-spring:
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url:  jdbc:postgresql://localhost:5433/postgres
-    username: postgres
-    password: postgres
-  jpa:
-    show-sql: true
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+  spring:
+    datasource:
+      driver-class-name: org.h2.Driver
+      url: jdbc:h2:mem:manager-core;MODE=PostgreSQL
+      username: sa
+      password:
+    jpa:
+      show-sql: true
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.H2Dialect
+    h2:
+      console:
+        enabled: true
+        settings:
+          web-allow-others: false
+#spring:
+#  datasource:
+#    driver-class-name: org.postgresql.Driver
+#    url:  jdbc:postgresql://localhost:5433/postgres
+#    username: postgres
+#    password: postgres
+#  jpa:
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQL10Dialect
