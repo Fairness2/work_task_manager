@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.gb.worktaskmanager.managerauth.converters.UserToDtoConverter;
 import ru.gb.worktaskmanager.managerauth.dtos.UserDto;
 import ru.gb.worktaskmanager.managerauth.exceptions.AppError;
+import ru.gb.worktaskmanager.managerauth.jwt.JwtRequest;
+import ru.gb.worktaskmanager.managerauth.jwt.JwtResponse;
 import ru.gb.worktaskmanager.managerauth.services.UserService;
 import ru.gb.worktaskmanager.managerauth.utils.JwtTokenUtil;
 
@@ -27,29 +29,23 @@ public class AuthController {
     private final JwtTokenUtil jwtTokenUtil;
     private final AuthenticationManager authenticationManager;
 
-//    @Operation(
-//            summary = "Создание токена",
-//            responses = {
-//                    @ApiResponse(
-//                            description = "Токен успешно создан", responseCode = "201"
-//                    )
-//            }
-//    )
-//    @PostMapping("/authenticate")
-//    public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest authRequest) {
-//        try {
-//            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-//        } catch (BadCredentialsException e) {
-//            return new ResponseEntity<>(new AppError("CHECK_TOKEN_ERROR", "Некорректный логин или пароль"), HttpStatus.UNAUTHORIZED);
-//        }
-//        UserDetails userDetails = userService.loadUserByUsername(authRequest.getUsername());
-//        String token = jwtTokenUtil.generateToken(userDetails);
-//        return ResponseEntity.ok(new JwtResponse(token));
-//    }
-//
-//    @GetMapping("/get_my_email")   //Вернул Dto... на фронте из нее можно взять все необходимое
-//    public UserDto getUserEmail() {
-//        return userToDtoConverter.userConvertToDtoByName(SecurityContextHolder.getContext().getAuthentication().getName());
-//    }
-
+    @Operation(
+            summary = "Создание токена",
+            responses = {
+                    @ApiResponse(
+                            description = "Токен успешно создан", responseCode = "201"
+                    )
+            }
+    )
+    @PostMapping("/authenticate")
+    public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest authRequest) {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+        } catch (BadCredentialsException e) {
+            return new ResponseEntity<>(new AppError("CHECK_TOKEN_ERROR", "Некорректный логин или пароль"), HttpStatus.UNAUTHORIZED);
+        }
+        UserDetails userDetails = userService.loadUserByUsername(authRequest.getUsername());
+        String token = jwtTokenUtil.generateToken(userDetails);
+        return ResponseEntity.ok(new JwtResponse(token));
+    }
 }
