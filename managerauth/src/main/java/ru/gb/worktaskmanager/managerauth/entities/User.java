@@ -2,6 +2,7 @@ package ru.gb.worktaskmanager.managerauth.entities;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.Collection;
 @Entity
 @Data
 @EqualsAndHashCode
+@RequiredArgsConstructor
 @Table(name = "user")
 public class User {
     @Id
