@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "2ede4c02-05bd-4ed0-a501-b34b4e363261",
+		"name": "WorkManager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11195201"
+	},
+	"item": [
+		{
+			"name": "Статусы заданий",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{task}}/task_statuses",
+					"host": [
+						"{{task}}"
+					],
+					"path": [
+						"task_statuses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создание задания",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"test\",\r\n    \"description\": \"test, test, test\",\r\n    \"employerId\": 1,\r\n    \"authorId\": 2,\r\n    \"responsibleUserId\": 1,\r\n    \"workingHours\": 10,\r\n    \"planStartDate\": \"2022-12-10 13:30\",\r\n    \"planEndDate\": \"2022-12-11 13:30\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{task}}/tasks",
+					"host": [
+						"{{task}}"
+					],
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение заданий",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"page\": 1,\r\n    \"userId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{task}}/tasks",
+					"host": [
+						"{{task}}"
+					],
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "task",
+			"value": "localhost:8189/manager-core",
+			"type": "string"
+		}
+	]
+}
