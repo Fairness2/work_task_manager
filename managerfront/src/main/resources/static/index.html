@@ -31,7 +31,7 @@
                 <li class="nav-item" ng-show="!isUserLoggedIn()">
                     <a class="nav-link" href="#!/register">Регистрация</a>
                 </li>
-                    <form class="align-middle" ng-submit="tryToAuth()">
+                    <form class="align-middle" ng-show="!isUserLoggedIn()" ng-submit="tryToAuth()">
                         <div class="input-group input-group-sm" style="padding: 4px;">
                             <input id="navLoginField" class="form-control" ng-model="user.username" type="text"
                                    aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">

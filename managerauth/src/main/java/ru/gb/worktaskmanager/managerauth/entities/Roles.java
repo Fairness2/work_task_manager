@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode
 @RequiredArgsConstructor
-@Table(name = "role")
+@Table(name = "roles")
 public class Roles {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -3,7 +3,7 @@ create table users
     id              bigserial primary key,
     username        varchar(36) not null,
     password        varchar(80) not null,
-    name            varchar(50) not null,
+    name            varchar(50),
     surname         varchar(50),
     patronymic      varchar(50),
     created_at      timestamp default current_timestamp,
@@ -31,9 +31,9 @@ insert into roles (title)
 values ('ROLE_USER'),
        ('ROLE_ADMIN');
 
-insert into users (username, password, name)
-values ('bob', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'bob'),
-       ('john', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'john');
+insert into users (username, password, name, surname, patronymic)
+values ('bob', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'bob', 'woods', 'bobs'),
+       ('john', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'john', 'johnson', 'johns');
 
 insert into ref_user_role (user_id, role_code)
 values (1, 1),

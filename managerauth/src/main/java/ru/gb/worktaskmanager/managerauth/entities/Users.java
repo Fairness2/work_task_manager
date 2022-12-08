@@ -5,7 +5,9 @@ import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
@@ -13,7 +15,7 @@ import java.util.Collection;
 @Data
 @EqualsAndHashCode
 @RequiredArgsConstructor
-@Table(name = "user")
+@Table(name = "users")
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +23,11 @@ public class Users {
     private Long id;
 
     @Column(name = "username")
+    @NotNull
     private String username;
 
     @Column(name = "password")
+    @NotNull
     private String password;
 
     @Column(name = "name")
