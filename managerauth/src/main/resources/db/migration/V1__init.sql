@@ -12,7 +12,7 @@ create table users
 
 create table roles
 (
-    code        varchar(15) primary key,
+    code        bigserial primary key,
     title       varchar(50) not null,
     created_at  timestamp default current_timestamp,
     updated_at  timestamp default current_timestamp
@@ -21,20 +21,20 @@ create table roles
 create table ref_user_role
 (
     user_id     bigint not null references users (id),
-    role_code   varchar(15) not null references roles (code),
+    role_code   bigint not null references roles (code),
     created_at  timestamp default current_timestamp,
     updated_at  timestamp default current_timestamp,
     primary key (user_id, role_code)
 );
 
-insert into roles (code, title)
-values ('USER', 'Пользователь'),
-       ('ADMIN', 'Руководитель');
+insert into roles (title)
+values ('ROLE_USER'),
+       ('ROLE_ADMIN');
 
 insert into users (username, password, name)
 values ('bob', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'bob'),
        ('john', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'john');
 
 insert into ref_user_role (user_id, role_code)
-values (1, 'USER'),
-       (2, 'ADMIN');
+values (1, 1),
+       (2,2);

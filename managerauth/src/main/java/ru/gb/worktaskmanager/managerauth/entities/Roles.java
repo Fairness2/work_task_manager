@@ -16,8 +16,9 @@ import java.time.LocalDateTime;
 @Table(name = "role")
 public class Roles {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "code")
-    private String code;
+    private Long code;
 
     @Column(name = "title")
     private String title;
