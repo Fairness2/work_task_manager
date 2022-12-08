@@ -14,7 +14,7 @@ import java.util.Collection;
 @EqualsAndHashCode
 @RequiredArgsConstructor
 @Table(name = "user")
-public class User {
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -39,7 +39,7 @@ public class User {
     @JoinTable(name = "ref_user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_code"))
-    private Collection<Role> roles;
+    private Collection<Roles> roles;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -49,7 +49,4 @@ public class User {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    public Long getId() {
-        return id;
-    }
 }

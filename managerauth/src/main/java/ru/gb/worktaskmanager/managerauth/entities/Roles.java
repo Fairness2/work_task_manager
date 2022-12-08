@@ -14,11 +14,10 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode
 @RequiredArgsConstructor
 @Table(name = "role")
-public class Role {
+public class Roles {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "code")
-    private Long code;
+    private String code;
 
     @Column(name = "title")
     private String title;
