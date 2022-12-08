@@ -14,6 +14,14 @@
                 templateUrl: 'register/register.html',
                 controller: 'registerController'
             })
+            .when('/tasks', {
+                templateUrl: 'tasks/tasks.html',
+                controller: 'tasksController'
+            })
+            .when('/mytasks', {
+                templateUrl: 'mytasks/mytasks.html',
+                controller: 'myTasksController'
+            })
             .otherwise({
                 redirectTo: '/'
             });
