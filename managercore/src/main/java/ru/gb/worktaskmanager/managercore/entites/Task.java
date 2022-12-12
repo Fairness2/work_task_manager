@@ -3,6 +3,8 @@ package ru.gb.worktaskmanager.managercore.entites;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.UpdateTimestamp;
 import ru.gb.worktaskmanager.managercore.dtos.UserDto;
 
@@ -16,7 +18,7 @@ import java.util.List;
  */
 @Data
 @Entity
-@Table(name = "d_task_status")
+@Table(name = "t_task")
 @NoArgsConstructor
 public class Task {
     /**
@@ -60,10 +62,12 @@ public class Task {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "task", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "task")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<RefTaskStatus> taskStatuses;
 
-    @OneToMany(mappedBy = "task", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "task")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<File> files;
 
     /**

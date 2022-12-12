@@ -3,7 +3,8 @@ package ru.gb.worktaskmanager.managercore.entites;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -33,7 +34,8 @@ public class RefTaskStatus {
     @JoinColumn(name = "task_id", nullable = false)
     private Task task;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinColumn(name = "status_code", nullable = false)
     private TaskStatus status;
 

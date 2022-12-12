@@ -69,7 +69,7 @@ create table files
     comment_id      bigint not null references comment (id),
     name            varchar(255),
     type            varchar(255),
-    link            varchar(255),
+    file_id         varchar(255),
     created_at      timestamp default current_timestamp,
     updated_at      timestamp default current_timestamp
 );
