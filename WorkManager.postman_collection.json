@@ -12,12 +12,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{task}}/task_statuses",
+					"raw": "{{task}}/task-statuses",
 					"host": [
 						"{{task}}"
 					],
 					"path": [
-						"task_statuses"
+						"task-statuses"
 					]
 				}
 			},
