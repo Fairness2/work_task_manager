@@ -78,4 +78,14 @@ public class File {
         File file = (File) o;
         return Objects.equals(id, file.id);
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"id\": " + id + "," +
+                "\"name\": \"" + name + "\"," +
+                "\"type\": \"" + type + "\"," +
+                "\"fileId\": \"" + fileId + "\"" +
+                "}";
+    }
 }

@@ -42,4 +42,12 @@ public class TaskStatus {
         TaskStatus that = (TaskStatus) o;
         return Objects.equals(code, that.code);
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"code\": \"" + code + "\"," +
+                "\"title\": \"" + title + "\"" +
+                "}";
+    }
 }

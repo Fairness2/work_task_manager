@@ -158,4 +158,14 @@ public class Task {
         Task task = (Task) o;
         return Objects.equals(id, task.id);
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"id\": " + id + "," +
+                "\"title\": \"" + title + "\"," +
+                "\"description\": \"" + description + "\"," +
+                "\"description\": \"" + description + "\"" +
+                "}";
+    }
 }

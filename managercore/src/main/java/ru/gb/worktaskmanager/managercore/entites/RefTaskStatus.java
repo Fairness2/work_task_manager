@@ -89,4 +89,12 @@ public class RefTaskStatus {
         RefTaskStatus that = (RefTaskStatus) o;
         return Objects.equals(id, that.id);
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"id\": " + id + "," +
+                "\"title\": \"" + title + "\"" +
+                "}";
+    }
 }
