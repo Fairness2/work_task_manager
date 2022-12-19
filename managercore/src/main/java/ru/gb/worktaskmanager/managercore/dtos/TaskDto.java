@@ -31,7 +31,9 @@ public class TaskDto {
 
     private String planEndDate;
 
-    private RefTaskStatusDto currentStatus;
+    private String createdAt;
+
+    private String updatedAt;
 
     private List<RefTaskStatusDto> historyStatus;
 

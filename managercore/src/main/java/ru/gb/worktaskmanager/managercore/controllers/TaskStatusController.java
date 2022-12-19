@@ -20,12 +20,12 @@ import java.util.stream.Collectors;
  * Контроллер статусов заданий
  */
 @RestController
-@RequestMapping("/task_statuses")
+@RequestMapping("/task-statuses")
 public class TaskStatusController {
-    private TaskStatusService service;
+    private final TaskStatusService service;
 
     @Autowired
-    private void setTaskStatusService(TaskStatusService service) {
+    public TaskStatusController(TaskStatusService service) {
         this.service = service;
     }
 
