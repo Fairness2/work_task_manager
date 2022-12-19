@@ -3,10 +3,12 @@ package ru.gb.worktaskmanager.managercore.entites;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * Статусы задания
@@ -37,6 +39,7 @@ public class File {
     @Column(name = "type")
     private String type;
 
+    @NaturalId
     @Column(name = "file_id") //ID фалйа в медиасервисе
     private String fileId;
 
@@ -63,5 +66,16 @@ public class File {
                 .toString();
     }
 
+    @Override
+    public int hashCode(){
+        return Objects.hashCode(id);
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        File file = (File) o;
+        return Objects.equals(id, file.id);
+    }
 }

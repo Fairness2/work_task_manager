@@ -10,10 +10,10 @@ import ru.gb.worktaskmanager.managercore.repositories.TaskRepository;
 
 @Service
 public class TaskService {
-    private TaskRepository repository;
+    private final TaskRepository repository;
 
     @Autowired
-    private void setTaskRepository(TaskRepository taskRepository) {
+    public TaskService(TaskRepository taskRepository) {
         this.repository = taskRepository;
     }
 

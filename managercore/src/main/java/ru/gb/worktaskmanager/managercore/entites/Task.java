@@ -12,6 +12,7 @@ import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Справочник статусов заданий
@@ -143,5 +144,18 @@ public class Task {
      */
     public String getStrUpdatedAt() {
         return dateToStr(this.updatedAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return Objects.equals(id, task.id);
     }
 }

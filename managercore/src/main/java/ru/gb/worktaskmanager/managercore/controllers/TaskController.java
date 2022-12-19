@@ -22,10 +22,10 @@ import java.util.stream.Collectors;
 @RequestMapping("/tasks")
 @Validated
 public class TaskController {
-    private TaskService service;
+    private final TaskService service;
 
     @Autowired
-    private void setTaskService(TaskService service) {
+    public TaskController(TaskService service) {
         this.service = service;
     }
 

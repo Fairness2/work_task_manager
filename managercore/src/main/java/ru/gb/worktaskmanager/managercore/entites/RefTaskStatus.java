@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * Статусы задания
@@ -74,5 +75,18 @@ public class RefTaskStatus {
      */
     public String getStrEndedAt() {
         return dateToStr(this.endedAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RefTaskStatus that = (RefTaskStatus) o;
+        return Objects.equals(id, that.id);
     }
 }

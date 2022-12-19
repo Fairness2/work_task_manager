@@ -2,8 +2,8 @@ package ru.gb.worktaskmanager.managercore.dtos;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import validation.intefaces.DateFormat;
-import validation.intefaces.StringDateGreaterOrEqualsThan;
+import validation.intefaces.DateGreaterOrEqualsThan;
+import validation.intefaces.DateGreaterOrEqualsThanNow;
 import validation.intefaces.UserExist;
 import validation.intefaces.UserWithRole;
 
@@ -11,11 +11,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-@StringDateGreaterOrEqualsThan.List({
-        @StringDateGreaterOrEqualsThan(
+@DateGreaterOrEqualsThan.List({
+        @DateGreaterOrEqualsThan(
                 field = "planEndDate",
                 secondField = "planStartDate",
                 message = "Плановая дата начала не может быть меньше плановой даты завершения"
@@ -49,14 +50,12 @@ public class RequestCreateTaskDto {
     @NotNull(message = "Число рабочих числов должно быть заполнено")
     private Integer workingHours;
 
-    @DateFormat(format = "yyyy-MM-dd kk:mm")
-    @StringDateGreaterOrEqualsThan(format = "yyyy-MM-dd kk:mm", message = "Планируемая дата начала должна быть больше текущей даты")
-    @NotBlank(message = "Планируемая дата начала должна быть заполнена")
-    private String planStartDate;
+    @NotNull(message = "Планируемая дата начала должна быть заполнена")
+    @DateGreaterOrEqualsThanNow(message = "Планируемая дата начала должна быть больше текущей даты")
+    private LocalDateTime planStartDate;
 
-    @DateFormat(format = "yyyy-MM-dd kk:mm")
-    @StringDateGreaterOrEqualsThan(format = "yyyy-MM-dd kk:mm", message = "Планируемая дата окончкания должна быть больше текущей даты")
-    @NotBlank(message = "Планируемая дата окончкания должна быть заполнена")
-    private String planEndDate;
+    @NotNull(message = "Планируемая дата окончкания должна быть заполнена")
+    @DateGreaterOrEqualsThanNow(message = "Планируемая дата окончкания должна быть больше текущей даты")
+    private LocalDateTime planEndDate;
 
 }
