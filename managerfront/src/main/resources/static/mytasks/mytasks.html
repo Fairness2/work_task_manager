@@ -1,0 +1,29 @@
+<div>
+    <p></p>
+    <h3>Все задания</h3>
+    <p></p>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <td>№</td>
+            <td>Заголовок</td>
+            <td>Автор задания</td>
+            <td>Время выполнения</td>
+            <td>Дата начала</td>
+            <td>Дата окончания</td>
+            <td>Статус</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="t in myTasks">
+            <td>{{t.id}}</td>
+            <td>{{t.title}}</td>
+            <td>{{t.author.username}}</td>
+            <td>{{t.workingHours}}</td>
+            <td>{{t.planStartDate}}</td>
+            <td>{{t.planEndDate}}</td>
+            <td>{{t.currentStatus.status.title}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

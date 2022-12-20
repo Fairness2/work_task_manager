@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: managergateway
+    name: taskmanager
   cloud:
     gateway:
       globalcors:
