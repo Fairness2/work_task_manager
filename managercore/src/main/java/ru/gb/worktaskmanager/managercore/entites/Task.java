@@ -1,5 +1,7 @@
 package ru.gb.worktaskmanager.managercore.entites;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -21,11 +23,13 @@ import java.util.Objects;
 @Entity
 @Table(name = "t_task")
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Task {
     /**
      * Стандартный формат даты
      */
-    private static final String dateFormat = "yyyy-MM-dd kk:mm";
+    private static final String dateFormat = "yyyy-MM-ddTkk:mm";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

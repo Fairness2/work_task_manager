@@ -1,5 +1,7 @@
 package ru.gb.worktaskmanager.managercore.entites;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -19,6 +21,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "ref_task_status")
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class RefTaskStatus {
     /**
      * Стандартный формат даты
@@ -29,8 +33,10 @@ public class RefTaskStatus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "title")
-    private String title;
+
+    @Column(name = "status_code")
+    private TaskStatusEnum statusCode;
+
     @ManyToOne
     @JoinColumn(name = "task_id", nullable = false)
     private Task task;
@@ -94,7 +100,6 @@ public class RefTaskStatus {
     public String toString() {
         return "{" +
                 "\"id\": " + id + "," +
-                "\"title\": \"" + title + "\"" +
                 "}";
     }
 }

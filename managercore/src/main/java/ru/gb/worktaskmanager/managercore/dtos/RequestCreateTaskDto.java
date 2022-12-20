@@ -34,17 +34,17 @@ public class RequestCreateTaskDto {
     @UserExist(message = "Такого работника не существует")
     @UserWithRole(role = "employer", message = "Работник не заявлен как работник")
     @NotNull(message = "Работник не может быть пустым")
-    private Integer employerId;
+    private Long employerId;
 
     @UserExist(message = "Автора не существует")
     @UserWithRole(role = "director", message = "Автор не заявлен как руководитель")
     @NotNull(message = "Автор не может быть пустым")
-    private Integer authorId; // TODO подставлять из принципала
+    private Long authorId; // TODO подставлять из принципала
 
     @UserExist(message = "Ответственного не существует")
     @UserWithRole(role = "employer", message = "Ответственный не заявлен как работник")
     @NotNull(message = "Ответственный не может быть пустым")
-    private Integer responsibleUserId;
+    private Long responsibleUserId;
 
     @Positive
     @NotNull(message = "Число рабочих числов должно быть заполнено")
