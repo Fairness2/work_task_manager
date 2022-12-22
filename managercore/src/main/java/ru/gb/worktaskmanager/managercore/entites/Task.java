@@ -67,13 +67,13 @@ public class Task {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "task")
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<RefTaskStatus> taskStatuses;
 
-    @OneToMany(mappedBy = "task")
+    /*@OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<File> files;
+    private List<File> files;*/
 
     /**
      * Получим данные работника из сервиса пользователей

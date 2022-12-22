@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import ru.gb.worktaskmanager.managercore.dtos.RequestCreateTaskDto;
 import ru.gb.worktaskmanager.managercore.entites.RefTaskStatus;
 import ru.gb.worktaskmanager.managercore.entites.Task;
+import ru.gb.worktaskmanager.managercore.entites.TaskStatus;
 import ru.gb.worktaskmanager.managercore.entites.TaskStatusEnum;
 import ru.gb.worktaskmanager.managercore.repositories.TaskRepository;
 
@@ -58,7 +59,9 @@ public class TaskService {
                 .build();
 
         RefTaskStatus taskStatus = RefTaskStatus.builder()
-                .statusCode(TaskStatusEnum.pending)
+                .status(new TaskStatus(TaskStatusEnum.pending.name(), null))
+                .task(task)
+                .userId(task.getAuthorId())
                 .build();
 
         task.setTaskStatuses(Arrays.stream(new RefTaskStatus[]{taskStatus})

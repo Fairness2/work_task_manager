@@ -19,26 +19,27 @@ public class TaskMapper implements Mapper<Task, TaskDto> {
                 .author(task.getAuthor())
                 .responsibleUser(task.getResponsibleUser())
                 .workingHours(task.getWorkingHours())
-                .planStartDate(task.getStrPlanStartDate())
-                .planEndDate(task.getStrPlanEndDate())
-                .createdAt(task.getStrCreatedAt())
-                .updatedAt(task.getStrUpdatedAt())
+                .planStartDate(task.getPlanStartDate().toString())
+                .planEndDate(task.getPlanEndDate().toString())
+                .createdAt(task.getCreatedAt().toString())
+                .updatedAt(task.getUpdatedAt().toString())
 
                 .historyStatus(task.getTaskStatuses().stream().map(status -> RefTaskStatusDto.builder()
                                 .taskId(task.getId())
                                 .status(new TaskStatusDto(status.getStatus().getCode(), status.getStatus().getTitle()))
-                                .createdAt(status.getStrCreatedAt())
-                                .endedAt(status.getStrEndedAt())
+                                .createdAt(status.getCreatedAt().toString())
+                                .endedAt(status.getEndedAt() == null ? null : status.getEndedAt().toString())
+                                .user(status.getUser())
                                 .build())
                         .collect(Collectors.toList()))
-
-                .files(task.getFiles().stream().map(file -> FileDto.builder()
+                //TODO
+                /*.files(task.getFiles().stream().map(file -> FileDto.builder()
                                 .taskId(task.getId())
                                 .name(file.getName())
                                 .type(file.getType())
                                 .link(file.getLink())
                                 .build())
-                        .collect(Collectors.toList()))
+                        .collect(Collectors.toList()))*/
 
                 .build();
     }

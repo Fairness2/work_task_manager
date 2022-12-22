@@ -8,7 +8,7 @@ import javax.validation.ConstraintValidatorContext;
 /**
  * Валиадатор для проверки соответствия даты формату
  */
-public class UserWithRoleValidator implements ConstraintValidator<UserWithRole, Integer> {
+public class UserWithRoleValidator implements ConstraintValidator<UserWithRole, Long> {
     private String role;
     @Override
     public void initialize(UserWithRole userWithRole){
@@ -16,7 +16,7 @@ public class UserWithRoleValidator implements ConstraintValidator<UserWithRole, 
     }
 
     @Override
-    public boolean isValid(Integer userId, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(Long userId, ConstraintValidatorContext constraintValidatorContext) {
         //TODO првоерка в сервисе авторизации
         return true;
     }

@@ -17,9 +17,9 @@ public class TaskSpecifications {
         return specification;
     }
 
-    private static Specification<Task> userEqual(Integer userId) {
+    private static Specification<Task> userEqual(Long userId) {
         return ((root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
-                .equal(root.get("employer_id"), userId)
+                .equal(root.get("employerId"), userId)
         );
     }
 }

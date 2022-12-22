@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.UpdateTimestamp;
+import ru.gb.worktaskmanager.managercore.dtos.UserDto;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
@@ -34,9 +35,6 @@ public class RefTaskStatus {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "status_code")
-    private TaskStatusEnum statusCode;
-
     @ManyToOne
     @JoinColumn(name = "task_id", nullable = false)
     private Task task;
@@ -56,6 +54,9 @@ public class RefTaskStatus {
 
     @Column(name = "ended_at")
     private LocalDateTime endedAt;
+
+    @Column(name = "user_id")
+    private Long userId;
 
     /**
      * Преобразователь даты в строку
@@ -81,6 +82,17 @@ public class RefTaskStatus {
      */
     public String getStrEndedAt() {
         return dateToStr(this.endedAt);
+    }
+
+    /**
+     * Получим данные автора из сервиса пользователей
+     * @return UserDto
+     */
+    public UserDto getUser() {
+        //TODO связь с сервисом пользователя и получение данных из него
+        return UserDto.builder()
+                .id(this.userId)
+                .build();
     }
 
     @Override
