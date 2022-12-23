@@ -69,7 +69,7 @@ create table t_comment
     text            text,
     task_id         bigint not null references t_task (id),
     author_id       bigint not null,
-    comment_type    varchar(50) not null references d_comment_type (code),
+    type_code    varchar(50) not null references d_comment_type (code),
     created_at      timestamp default current_timestamp,
     updated_at      timestamp default current_timestamp
 );

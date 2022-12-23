@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import ru.gb.worktaskmanager.managercore.entites.TaskStatus;
 
 @Repository
-public interface TaskStatusRepository extends JpaRepository<TaskStatus, Integer> {
+public interface TaskStatusRepository extends JpaRepository<TaskStatus, String> {
 
 }

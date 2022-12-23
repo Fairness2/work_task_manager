@@ -24,6 +24,23 @@
 			"response": []
 		},
 		{
+			"name": "Типы комментариев",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{task}}/comment-types",
+					"host": [
+						"{{task}}"
+					],
+					"path": [
+						"comment-types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Создание задания",
 			"request": {
 				"method": "POST",

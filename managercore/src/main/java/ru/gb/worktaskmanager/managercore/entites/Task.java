@@ -75,6 +75,9 @@ public class Task {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<File> files;*/
 
+    @OneToMany(mappedBy = "task")
+    private List<Comment> comments;
+
     /**
      * Получим данные работника из сервиса пользователей
      * @return UserDto
