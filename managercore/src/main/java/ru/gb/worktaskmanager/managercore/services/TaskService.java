@@ -12,10 +12,8 @@ import ru.gb.worktaskmanager.managercore.entites.TaskStatus;
 import ru.gb.worktaskmanager.managercore.entites.TaskStatusEnum;
 import ru.gb.worktaskmanager.managercore.repositories.TaskRepository;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class TaskService {

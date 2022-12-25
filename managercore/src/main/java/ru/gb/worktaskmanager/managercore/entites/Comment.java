@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.UpdateTimestamp;
 import ru.gb.worktaskmanager.managercore.dtos.UserDto;
 
@@ -46,6 +48,7 @@ public class Comment {
     private Task task;
 
     @ManyToOne()
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinColumn(name = "type_code", nullable = false)
     private CommentType type;
 
@@ -59,6 +62,11 @@ public class Comment {
         return UserDto.builder()
                 .id(this.authorId)
                 .build();
+    }
+
+    public Long getTaskId() {
+        //TODO понять запрашивается ли весь task для этого. Нужно получить только ID, которое является значение join колонки
+        return this.task.getId();
     }
 
     @Override

@@ -6,8 +6,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.gb.worktaskmanager.managercore.dtos.RequestCreateCommentDto;
-import ru.gb.worktaskmanager.managercore.entites.*;
+import ru.gb.worktaskmanager.managercore.entites.Comment;
+import ru.gb.worktaskmanager.managercore.entites.CommentType;
+import ru.gb.worktaskmanager.managercore.entites.Task;
 import ru.gb.worktaskmanager.managercore.repositories.CommentRepository;
+import ru.gb.worktaskmanager.managercore.repositories.CommentTypeRepository;
+import ru.gb.worktaskmanager.managercore.repositories.TaskRepository;
 
 /**
  * Сервис комментариев к заданиям
@@ -15,10 +19,14 @@ import ru.gb.worktaskmanager.managercore.repositories.CommentRepository;
 @Service
 public class CommentService {
     private final CommentRepository repository;
+    private final CommentTypeRepository typeRepository;
+    private final TaskRepository taskRepository;
 
     @Autowired
-    public CommentService(CommentRepository repository) {
+    public CommentService(CommentRepository repository, CommentTypeRepository typeRepository, TaskRepository taskRepository) {
         this.repository = repository;
+        this.typeRepository = typeRepository;
+        this.taskRepository = taskRepository;
     }
 
     /**
@@ -42,15 +50,15 @@ public class CommentService {
      * @return Comment
      */
     public Comment createComment(RequestCreateCommentDto commentDto) {
+        CommentType type = typeRepository.getReferenceById(commentDto.getType());
+        Task task = taskRepository.getReferenceById(commentDto.getTaskId());
+
         Comment comment = Comment.builder()
                 .text(commentDto.getText())
                 .authorId(commentDto.getAuthorId()) // TODO из авторизованного пользователя
-                .task(Task.builder()
-                        .id(commentDto.getTaskId())
-                        .build())
-                .type(new CommentType(commentDto.getType(), null))
+                .task(task)
+                .type(type)
                 .build();
-
 
         comment = repository.save(comment);
 

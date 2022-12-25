@@ -24,23 +24,6 @@
 			"response": []
 		},
 		{
-			"name": "Типы комментариев",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{task}}/comment-types",
-					"host": [
-						"{{task}}"
-					],
-					"path": [
-						"comment-types"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Создание задания",
 			"request": {
 				"method": "POST",
@@ -90,6 +73,78 @@
 					],
 					"path": [
 						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Типы комментариев",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{task}}/comment-types",
+					"host": [
+						"{{task}}"
+					],
+					"path": [
+						"comment-types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создание комментария",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\": \"test, test, test\",\r\n    \"authorId\": 2,\r\n    \"type\": \"comment\",\r\n    \"taskId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{task}}/comments",
+					"host": [
+						"{{task}}"
+					],
+					"path": [
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение комментариев",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"page\": 1,\r\n    \"taskId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{task}}/comments",
+					"host": [
+						"{{task}}"
+					],
+					"path": [
+						"comments"
 					]
 				}
 			},
