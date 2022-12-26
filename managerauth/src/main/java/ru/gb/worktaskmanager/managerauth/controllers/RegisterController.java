@@ -7,12 +7,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.gb.worktaskmanager.managerauth.converters.RegisterUserDtoToUserConverter;
 import ru.gb.worktaskmanager.managerauth.dtos.RegisterUserDto;
 import ru.gb.worktaskmanager.managerauth.services.UserService;
 
 @RestController
+@RequestMapping
 @RequiredArgsConstructor
 @Tag(name = "Регистрация", description = "Методы регистрации нового пользователя")
 public class RegisterController {
