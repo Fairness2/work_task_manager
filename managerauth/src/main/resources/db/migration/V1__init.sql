@@ -28,8 +28,8 @@ create table ref_user_role
 );
 
 insert into roles (title)
-values ('ROLE_USER'),
-       ('ROLE_ADMIN');
+values ('USER'),
+       ('ADMIN');
 
 insert into users (username, password, name, surname, patronymic)
 values ('bob', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'bob', 'woods', 'bobs'),
