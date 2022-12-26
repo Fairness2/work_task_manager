@@ -9,10 +9,10 @@ import java.util.List;
 
 @Service
 public class TaskStatusService {
-    private TaskStatusRepository repository;
+    private final TaskStatusRepository repository;
 
     @Autowired
-    private void setTaskRepository(TaskStatusRepository taskStatusRepository) {
+    public TaskStatusService(TaskStatusRepository taskStatusRepository) {
         this.repository = taskStatusRepository;
     }
 

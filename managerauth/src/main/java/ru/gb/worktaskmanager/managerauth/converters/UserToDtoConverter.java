@@ -3,7 +3,7 @@ package ru.gb.worktaskmanager.managerauth.converters;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.gb.worktaskmanager.managerauth.dtos.UserDto;
-import ru.gb.worktaskmanager.managerauth.entities.User;
+import ru.gb.worktaskmanager.managerauth.entities.Users;
 import ru.gb.worktaskmanager.managerauth.services.UserService;
 
 @Component
@@ -12,7 +12,7 @@ public class UserToDtoConverter {
     private final UserService userService;
 
     public UserDto userConvertToDtoByName(String username) {
-        User user = userService.findByUsername(username).get();
+        Users user = userService.findByUsername(username).get();
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
         userDto.setUsername(user.getUsername());
@@ -22,7 +22,7 @@ public class UserToDtoConverter {
         return userDto;
     }
 
-    public UserDto userConvertToDto(User user) {
+    public UserDto userConvertToDto(Users user) {
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
         userDto.setUsername(user.getUsername());

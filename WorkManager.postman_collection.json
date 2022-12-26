@@ -12,12 +12,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{task}}/task_statuses",
+					"raw": "{{task}}/task-statuses",
 					"host": [
 						"{{task}}"
 					],
 					"path": [
-						"task_statuses"
+						"task-statuses"
 					]
 				}
 			},
@@ -30,7 +30,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"test\",\r\n    \"description\": \"test, test, test\",\r\n    \"employerId\": 1,\r\n    \"authorId\": 2,\r\n    \"responsibleUserId\": 1,\r\n    \"workingHours\": 10,\r\n    \"planStartDate\": \"2022-12-10 13:30\",\r\n    \"planEndDate\": \"2022-12-11 13:30\"\r\n}",
+					"raw": "{\r\n    \"title\": \"test\",\r\n    \"description\": \"test, test, test\",\r\n    \"employerId\": 1,\r\n    \"authorId\": 2,\r\n    \"responsibleUserId\": 1,\r\n    \"workingHours\": 10,\r\n    \"planStartDate\": \"2023-01-10T13:30\",\r\n    \"planEndDate\": \"2023-01-11T13:30\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

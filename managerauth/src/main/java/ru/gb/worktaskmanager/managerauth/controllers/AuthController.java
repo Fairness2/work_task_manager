@@ -9,11 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import ru.gb.worktaskmanager.managerauth.converters.UserToDtoConverter;
-import ru.gb.worktaskmanager.managerauth.dtos.UserDto;
 import ru.gb.worktaskmanager.managerauth.exceptions.AppError;
 import ru.gb.worktaskmanager.managerauth.jwt.JwtRequest;
 import ru.gb.worktaskmanager.managerauth.jwt.JwtResponse;
@@ -21,6 +22,7 @@ import ru.gb.worktaskmanager.managerauth.services.UserService;
 import ru.gb.worktaskmanager.managerauth.utils.JwtTokenUtil;
 
 @RestController
+@RequestMapping
 @RequiredArgsConstructor
 @Tag(name = "Аутентификация", description = "Методы создания токена и аутентификации")
 public class AuthController {
