@@ -15,7 +15,8 @@ public class CommentMapper implements Mapper<Comment, CommentResponseDto> {
                 .updatedAt(comment.getUpdatedAt().toString())
                 .type(new CommentTypeResponseDto(comment.getType().getCode(), comment.getType().getTitle()))
                 .taskId(comment.getTaskId())
-
+                .resultAt(comment.getResultAt() != null ? comment.getResultAt().toString() : null)
+                .action(comment.getAction() != null ? comment.getAction().name() : null)
                 .build();
     }
 }

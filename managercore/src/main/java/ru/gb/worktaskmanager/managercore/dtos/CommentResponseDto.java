@@ -24,4 +24,8 @@ public class CommentResponseDto {
     private Long taskId;
 
     private CommentTypeResponseDto type;
+
+    private String resultAt;
+
+    private String action;
 }

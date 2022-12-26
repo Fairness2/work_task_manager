@@ -52,6 +52,12 @@ public class Comment {
     @JoinColumn(name = "type_code", nullable = false)
     private CommentType type;
 
+    @Column(name = "result_at")
+    private LocalDateTime resultAt;
+
+    @Column(name = "action_code")
+    private ActionEnum action;
+
 
     /**
      * Получим данные автора из сервиса пользователей

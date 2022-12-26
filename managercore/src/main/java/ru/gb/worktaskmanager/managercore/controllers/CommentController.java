@@ -34,7 +34,7 @@ public class CommentController {
     }
 
     @GetMapping()
-    public CommentListResponseDto getTasks(@RequestBody @Valid CommentRequestDto requestDto) {
+    public CommentListResponseDto getComments(@RequestBody @Valid CommentRequestDto requestDto) {
         //TODO по текущему пользователю
         //TODO описание свагера
         Specification<Comment> specification = CommentSpecifications.build(requestDto);
@@ -50,7 +50,16 @@ public class CommentController {
     }
 
     @PostMapping()
-    public CommentResponseDto createTask(@RequestBody @Valid RequestCreateCommentDto createCommentDto) {
+    public CommentResponseDto createComment(@RequestBody @Valid RequestCreateCommentDto createCommentDto) {
+        //TODO Создание задания с подстановкой текущего пользователя
+        //TODO описание свагера
+        Comment newComment = service.createComment(createCommentDto);
+
+        return (new CommentMapper()).map(newComment);
+    }
+
+    @PostMapping("/action")
+    public CommentResponseDto actionComment(@RequestBody @Valid RequestCreateCommentDto createCommentDto) {
         //TODO Создание задания с подстановкой текущего пользователя
         //TODO описание свагера
         Comment newComment = service.createComment(createCommentDto);

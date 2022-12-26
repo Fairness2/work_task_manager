@@ -9,7 +9,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 /**
- * Валиадатор для проверки, что тип задание существует.
+ * Валиадатор для проверки, что задание существует.
  */
 public class TaskExistValidator implements ConstraintValidator<TaskExist, Long> {
 

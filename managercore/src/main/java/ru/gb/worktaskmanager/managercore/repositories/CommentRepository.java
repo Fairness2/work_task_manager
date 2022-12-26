@@ -7,5 +7,5 @@ import ru.gb.worktaskmanager.managercore.entites.Comment;
 
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Integer>, JpaSpecificationExecutor<Comment> {
-
+    public boolean existsByIdAndActionIsNull(Long id);
 }

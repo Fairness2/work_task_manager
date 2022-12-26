@@ -2,7 +2,7 @@ package ru.gb.worktaskmanager.managercore.dtos;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import validation.intefaces.UserExist;
+import validation.intefaces.TaskExist;
 
 import javax.validation.constraints.Positive;
 
@@ -12,7 +12,7 @@ public class CommentRequestDto {
     @Positive
     private Integer page;
     @Positive
-    @UserExist
+    @TaskExist
     private Long taskId;
 
     //TODO остальные параметры фильтрации
