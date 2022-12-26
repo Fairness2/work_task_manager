@@ -8,12 +8,12 @@ import javax.validation.constraints.Positive;
 
 @Data
 @NoArgsConstructor
-public class TaskRequestDto {
+public class CommentRequestDto {
     @Positive
     private Integer page;
     @Positive
     @UserExist
-    private Long userId;
+    private Long taskId;
 
     //TODO остальные параметры фильтрации
 }

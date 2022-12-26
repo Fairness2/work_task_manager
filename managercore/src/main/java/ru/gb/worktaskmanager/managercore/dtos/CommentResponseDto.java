@@ -9,11 +9,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RefTaskStatusDto {
+public class CommentResponseDto {
+
     private Long id;
-    private Long taskId;
-    private TaskStatusDto status;
+
+    private String text;
+
+    private UserDto author;
+
     private String createdAt;
-    private String endedAt;
-    private UserDto user;
+
+    private String updatedAt;
+
+    private Long taskId;
+
+    private CommentTypeResponseDto type;
 }

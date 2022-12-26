@@ -34,39 +34,51 @@ create table ref_task_status
     ended_at        timestamp default current_timestamp,
     user_id         bigint not null
 );
-create table comment_type
+create table d_comment_type
 (
-    code            bigserial primary key,
+    code            varchar(50) primary key,
     title           varchar(255)
 );
-create table action
+INSERT INTO d_comment_type(code, title) VALUES
+                                           ('comment', 'Комментарий'),
+                                           ('pause_request', 'Заявка на приостановку'),
+                                           ('start_request', 'Заявка на возобновление');
+create table d_action
 (
-    code            bigserial primary key,
+    code            varchar(50) primary key,
     title           varchar(255)
 );
-create table action_role
+INSERT INTO d_action(code, title) VALUES
+                                            ('approve', 'Одобрить'),
+                                            ('disprove', 'Отклонить'),
+                                            ('cancel', 'Отменить');
+create table ref_action_role
 (
     id              bigserial primary key,
-    action_code     bigint not null references action (code),
-    role_code       bigint not null,
+    action_code     varchar(50) not null references d_action (code),
+    role_code       varchar(50) not null,
     created_at      timestamp default current_timestamp
 );
-create table comment
+INSERT INTO ref_action_role(action_code, role_code) VALUES
+                                      ('approve', 'ROLE_ADMIN'),
+                                      ('disprove', 'ROLE_ADMIN'),
+                                      ('cancel', 'ROLE_USER');
+create table t_comment
 (
     id              bigserial primary key,
-    text            varchar(255),
+    text            text,
     task_id         bigint not null references t_task (id),
     author_id       bigint not null,
-    comment_type    bigint not null references comment_type (code),
+    type_code    varchar(50) not null references d_comment_type (code),
     created_at      timestamp default current_timestamp,
     updated_at      timestamp default current_timestamp
 );
-create table files
+create table t_files
 (
     id              bigserial primary key,
-    task_id         bigint not null references t_task (id),
+    task_id         bigint references t_task (id),
     user_id         bigint not null,
-    comment_id      bigint not null references comment (id),
+    comment_id      bigint references t_comment (id),
     name            varchar(255),
     type            varchar(255),
     file_id         varchar(255),

@@ -1,11 +1,14 @@
 package ru.gb.worktaskmanager.managercore.entites;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.UpdateTimestamp;
+import ru.gb.worktaskmanager.managercore.dtos.UserDto;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
@@ -19,6 +22,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "ref_task_status")
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class RefTaskStatus {
     /**
      * Стандартный формат даты
@@ -29,8 +34,7 @@ public class RefTaskStatus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "title")
-    private String title;
+
     @ManyToOne
     @JoinColumn(name = "task_id", nullable = false)
     private Task task;
@@ -50,6 +54,9 @@ public class RefTaskStatus {
 
     @Column(name = "ended_at")
     private LocalDateTime endedAt;
+
+    @Column(name = "user_id")
+    private Long userId;
 
     /**
      * Преобразователь даты в строку
@@ -77,6 +84,17 @@ public class RefTaskStatus {
         return dateToStr(this.endedAt);
     }
 
+    /**
+     * Получим данные автора из сервиса пользователей
+     * @return UserDto
+     */
+    public UserDto getUser() {
+        //TODO связь с сервисом пользователя и получение данных из него
+        return UserDto.builder()
+                .id(this.userId)
+                .build();
+    }
+
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
@@ -94,7 +112,6 @@ public class RefTaskStatus {
     public String toString() {
         return "{" +
                 "\"id\": " + id + "," +
-                "\"title\": \"" + title + "\"" +
                 "}";
     }
 }
