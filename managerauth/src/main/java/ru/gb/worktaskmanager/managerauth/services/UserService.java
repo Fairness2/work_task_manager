@@ -8,11 +8,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.gb.worktaskmanager.managerauth.converters.UserToDtoConverter;
+import ru.gb.worktaskmanager.managerauth.dtos.UserListDto;
 import ru.gb.worktaskmanager.managerauth.entities.Roles;
 import ru.gb.worktaskmanager.managerauth.entities.Users;
 import ru.gb.worktaskmanager.managerauth.repositories.UserRepository;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -20,6 +23,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
+    private final UserToDtoConverter userToDtoConverter;
 
     public Optional<Users> findByUsername(String username) {
         return userRepository.findByUsername(username);
@@ -38,5 +42,10 @@ public class UserService implements UserDetailsService {
 
     public void createNewUser(Users user) {
         userRepository.save(user);
+    }
+
+    public UserListDto findAllUsers() {
+        List<Users> usersList = userRepository.findAll();
+        return  userToDtoConverter.userListConvertToDto(usersList);
     }
 }

@@ -1,0 +1,75 @@
+<div>
+    <div>
+        <br>
+        <br>
+        <h1 style="text-align: center">Создание нового задания</h1>
+        <br>
+        <label>
+            Введите заголовок задания
+        </label>
+        <p></p>
+        <input id="navTitleField" placeholder="Заголовок" class="form-control" ng-model="newTask.title" type="text"
+               aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">
+        <p></p>
+        <label>
+            Введите описание задания
+        </label>
+        <p></p>
+        <input id="navDescriptionField" placeholder="Описание задания" class="form-control" ng-model="newTask.description" type="text"
+               aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">
+        <p></p>
+        <label>
+            Работник
+        </label>
+        <form>
+            <select id="navEmployerIdField" class="form-control" ng-model="newTask.employerId" style="margin-left: 10px; width: 300px;">
+                <option value=""></option>
+                <option value="petersburg">Санкт-Петербург</option>
+                <option value="samara">Самара</option>
+                <option value="perm">Пермь</option>
+                <option value="novosibirsk">Новосибирск</option>
+            </select>
+        </form>
+        <p></p>
+
+        <p></p>
+        <label>
+            Ответственный
+        </label>
+        <p></p>
+        <form>
+            <select id="navResponsibleUserIdIdField" class="form-control" ng-model="newTask.responsibleUserId" style="margin-left: 10px; width: 300px;">
+                <option value=""></option>
+                <option value="petersburg">Санкт-Петербург</option>
+                <option value="samara">Самара</option>
+                <option value="perm">Пермь</option>
+                <option value="novosibirsk">Новосибирск</option>
+            </select>
+        </form>
+        <p></p>
+        <label>
+            Количество часов на выполнение
+        </label>
+        <p></p>
+        <input id="navWorkingHoursField" placeholder="Количество часов на выполнение" class="form-control" ng-model="newTask.workingHours" type="text"
+               aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">
+        <p></p>
+        <label>
+            Планируемая дата начала
+        </label>
+        <p></p>
+        <input type="date" id="navPlanStartDateField" class="form-control" ng-model="newTask.planStartDate" style="margin-left: 10px; width: 300px;"
+               value=""
+               min="2018-01-01" max="2040-12-31">
+        <p></p>
+        <label>
+            Планируемая дата окончкания
+        </label>
+        <p></p>
+        <input type="date" id="navPlanEndDateField" class="form-control" ng-model="newTask.planEndDate" style="margin-left: 10px; width: 300px;"
+               value=""
+        min="2018-01-01" max="2040-12-31">
+        <p></p>
+        <button ng-show="isFieldsTaskOk()" class="btn btn-primary" ng-click="createNewTask()">Создать задание</button>
+    </div>
+</div>
