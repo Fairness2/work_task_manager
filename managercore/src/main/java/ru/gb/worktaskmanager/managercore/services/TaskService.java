@@ -57,7 +57,7 @@ public class TaskService {
                 .build();
 
         RefTaskStatus taskStatus = RefTaskStatus.builder()
-                .status(new TaskStatus(TaskStatusEnum.pending.name(), null))
+                .status(new TaskStatus(TaskStatusEnum.pending.name(), TaskStatusEnum.pending.name()))
                 .task(task)
                 .userId(task.getAuthorId())
                 .build();
