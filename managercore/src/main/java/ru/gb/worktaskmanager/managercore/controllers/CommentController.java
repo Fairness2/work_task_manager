@@ -5,10 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.gb.worktaskmanager.managercore.dtos.CommentListResponseDto;
-import ru.gb.worktaskmanager.managercore.dtos.CommentRequestDto;
-import ru.gb.worktaskmanager.managercore.dtos.CommentResponseDto;
-import ru.gb.worktaskmanager.managercore.dtos.RequestCreateCommentDto;
+import ru.gb.worktaskmanager.managercore.dtos.*;
 import ru.gb.worktaskmanager.managercore.entites.Comment;
 import ru.gb.worktaskmanager.managercore.mappers.CommentMapper;
 import ru.gb.worktaskmanager.managercore.repositories.specifications.CommentSpecifications;
@@ -59,11 +56,10 @@ public class CommentController {
     }
 
     @PostMapping("/action")
-    public CommentResponseDto actionComment(@RequestBody @Valid RequestCreateCommentDto createCommentDto) {
+    public boolean actionComment(@RequestBody @Valid ActionRequestDto requestDto) {
         //TODO Создание задания с подстановкой текущего пользователя
         //TODO описание свагера
-        Comment newComment = service.createComment(createCommentDto);
 
-        return (new CommentMapper()).map(newComment);
+        return service.actionComment(requestDto.getAction(), requestDto.getCommentId());
     }
 }

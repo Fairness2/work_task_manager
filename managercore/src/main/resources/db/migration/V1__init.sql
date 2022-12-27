@@ -42,7 +42,8 @@ create table d_comment_type
 INSERT INTO d_comment_type(code, title) VALUES
                                            ('comment', 'Комментарий'),
                                            ('pause_request', 'Заявка на приостановку'),
-                                           ('start_request', 'Заявка на возобновление');
+                                           ('start_request', 'Заявка на возобновление'),
+                                           ('done_request', 'Заявка на завершение');
 create table d_action
 (
     code            varchar(50) primary key,
