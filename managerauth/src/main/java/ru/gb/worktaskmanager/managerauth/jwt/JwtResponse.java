@@ -1,23 +1,15 @@
 package ru.gb.worktaskmanager.managerauth.jwt;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Schema(description = "Модель ответа авторизации")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class JwtResponse {
     @Schema(description = "Возвращенный токен", required = true)
     private String token;
-
-    public JwtResponse() {
-    }
-
-    public JwtResponse(String token) {
-        this.token = token;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
+    private Long id;
 }

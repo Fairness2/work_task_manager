@@ -11,6 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-route.min.js"></script>
+
 </head>
 
 <body>
@@ -23,10 +24,13 @@
                     <a class="nav-link" href="#!/">Task Manager</a>
                 </li>
                 <li class="nav-item" ng-show="isUserLoggedIn()">
-                    <a class="nav-link" href="#!/tasks">Все задания</a>
+                    <a class="nav-link" href="#!/alltasks">Все задания</a>
                 </li>
                 <li class="nav-item" ng-show="isUserLoggedIn()">
                     <a class="nav-link" href="#!/mytasks">Мои задания</a>
+                </li>
+                <li class="nav-item" ng-show="isUserLoggedIn()">
+                    <a class="nav-link" href="#!/newtask">Новое задание</a>
                 </li>
                 <li class="nav-item" ng-show="!isUserLoggedIn()">
                     <a class="nav-link" href="#!/register">Регистрация</a>
@@ -57,8 +61,9 @@
     <script src="index.js"></script>
     <script src="welcome/welcome.js"></script>
     <script src="register/register.js"></script>
-    <script src="tasks/tasks.js"></script>
+    <script src="alltasks/alltasks.js"></script>
     <script src="mytasks/mytasks.js"></script>
+    <script src="newtask/newtask.js"></script>
 </div>
 </body>
 </html>
