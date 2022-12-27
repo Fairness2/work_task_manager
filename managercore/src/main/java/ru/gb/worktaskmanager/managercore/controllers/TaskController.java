@@ -1,5 +1,6 @@
 package ru.gb.worktaskmanager.managercore.controllers;
 
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
@@ -38,6 +39,19 @@ public class TaskController {
         int page = requestDto.getPage() == null ? 1 : requestDto.getPage();
         Page<Task> taskPage = service.getTasks(page, specification);
         //TODO DTO mapper
+        List<TaskDto> taskDtos = taskPage.getContent()
+                .stream()
+                .map(task -> (new TaskMapper()).map(task))
+                .collect(Collectors.toList());
+
+        return new TaskListDto(taskDtos, page, taskPage.getTotalPages());
+    }
+
+    @GetMapping("/get-all")
+    public TaskListDto getAllTasks(@RequestParam (name = "pageIndex", defaultValue = "1")  @Parameter(description = "Номер страницы", required = true) Integer pageIndex) {
+        int page = pageIndex == null ? 1 : pageIndex;
+        Specification<Task> specification = Specification.where(null);
+        Page<Task> taskPage = service.getTasks(page, specification);
         List<TaskDto> taskDtos = taskPage.getContent()
                 .stream()
                 .map(task -> (new TaskMapper()).map(task))
