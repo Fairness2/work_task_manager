@@ -1,6 +1,8 @@
 package ru.gb.worktaskmanager.managercore.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
@@ -47,6 +49,14 @@ public class TaskController {
         return new TaskListDto(taskDtos, page, taskPage.getTotalPages());
     }
 
+    @Operation(
+            summary = "Получение списка всех заданий",
+            responses = {
+                    @ApiResponse(
+                            description = "Список получен", responseCode = "200"
+                    )
+            }
+    )
     @GetMapping("/get-all")
     public TaskListDto getAllTasks(@RequestParam (name = "pageIndex", defaultValue = "1")  @Parameter(description = "Номер страницы", required = true) Integer pageIndex) {
         int page = pageIndex == null ? 1 : pageIndex;
