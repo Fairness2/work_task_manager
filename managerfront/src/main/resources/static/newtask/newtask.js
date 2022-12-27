@@ -1,4 +1,4 @@
-angular.module('taskmanager').controller('newTaskController', function ($scope, $rootScope, $http, $localStorage, $location) {
+angular.module('taskmanager').controller('newTaskController', function ($scope, $http, $localStorage, $location) {
 
     $scope.createNewTask = function () {
         $scope.newTask.workingHours = ($scope.newTask.planEndDate - $scope.newTask.planStartDate) / 3600000;
@@ -18,9 +18,9 @@ angular.module('taskmanager').controller('newTaskController', function ($scope, 
         });
     };
 
-    // $rootScope.isFieldsNewTaskOk = function () {
-    //     if (($scope.newTask.title !== undefined && $scope.newTask.description !== undefined) &&
-    //         ($scope.newTask.title !== '' && $scope.newTask.description !== '') &&
+    //TODO доделать проверки заполненности всех полей
+    // $scope.isFieldsNewTaskOk = function () {
+    //     if (($scope.newTask.title !== '' && $scope.newTask.description !== '') &&
     //         $scope.newTask.employerId > 0 && $scope.newTask.responsibleUserId > 0) {
     //         return true;
     //     } else {
