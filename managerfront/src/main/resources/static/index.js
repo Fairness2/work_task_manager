@@ -57,8 +57,7 @@ angular.module('taskmanager').controller('indexController', function ($rootScope
             .then(function successCallback(response) {
                 if (response.data.token) {
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
-                    $localStorage.workTaskUser = {username: $scope.user.username, token: response.data.token};
-
+                    $localStorage.workTaskUser = {username: $scope.user.username, token: response.data.token, id: response.data.id};
                     $scope.user.username = null;
                     $scope.user.password = null;
 
