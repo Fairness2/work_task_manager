@@ -7,6 +7,7 @@ import ru.gb.worktaskmanager.managerauth.dtos.UserListDto;
 import ru.gb.worktaskmanager.managerauth.entities.Users;
 import ru.gb.worktaskmanager.managerauth.services.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component

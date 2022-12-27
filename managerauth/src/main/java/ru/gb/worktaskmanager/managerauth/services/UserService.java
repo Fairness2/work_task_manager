@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
-    private final UserToDtoConverter userToDtoConverter;
 
     public Optional<Users> findByUsername(String username) {
         return userRepository.findByUsername(username);
@@ -44,8 +43,8 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-    public UserListDto findAllUsers() {
+    public List<Users> findAllUsers() {
         List<Users> usersList = userRepository.findAll();
-        return  userToDtoConverter.userListConvertToDto(usersList);
+        return usersList;
     }
 }

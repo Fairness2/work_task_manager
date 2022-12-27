@@ -23,11 +23,7 @@
         </label>
         <form>
             <select id="navEmployerIdField" class="form-control" ng-model="newTask.employerId" style="margin-left: 10px; width: 300px;">
-                <option value=""></option>
-                <option value="petersburg">Санкт-Петербург</option>
-                <option value="samara">Самара</option>
-                <option value="perm">Пермь</option>
-                <option value="novosibirsk">Новосибирск</option>
+                <option ng-repeat="u in users.userList" value={{u.id}}>{{u.username + ' - '}}{{u.name + ' '}}{{u.surname}}</option>
             </select>
         </form>
         <p></p>
@@ -39,11 +35,7 @@
         <p></p>
         <form>
             <select id="navResponsibleUserIdIdField" class="form-control" ng-model="newTask.responsibleUserId" style="margin-left: 10px; width: 300px;">
-                <option value=""></option>
-                <option value="petersburg">Санкт-Петербург</option>
-                <option value="samara">Самара</option>
-                <option value="perm">Пермь</option>
-                <option value="novosibirsk">Новосибирск</option>
+                <option ng-repeat="u in users.userList" value={{u.id}}>{{u.username + ' - '}}{{u.name + ' '}}{{u.surname}}</option>
             </select>
         </form>
         <p></p>
@@ -51,8 +43,17 @@
             Количество часов на выполнение
         </label>
         <p></p>
-        <input id="navWorkingHoursField" placeholder="Количество часов на выполнение" class="form-control" ng-model="newTask.workingHours" type="text"
-               aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">
+        <select id="navWorkingHoursField" class="form-control" ng-model="newTask.workingHours" style="margin-left: 10px; width: 300px;">
+            <option value="0"></option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+        </select>
         <p></p>
         <label>
             Планируемая дата начала
@@ -70,6 +71,8 @@
                value=""
         min="2018-01-01" max="2040-12-31">
         <p></p>
-        <button ng-show="isFieldsTaskOk()" class="btn btn-primary" ng-click="createNewTask()">Создать задание</button>
+        <button ng-show="isFieldsOk()" class="btn btn-primary" ng-click="createNewTask()">Создать задание</button>
+
+<!--        -->
     </div>
 </div>
