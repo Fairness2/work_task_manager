@@ -1,11 +1,6 @@
 angular.module('taskmanager').controller('allTasksController', function ($scope, $http) {
 
-        $scope.tasksRequest = {
-            page : 0,
-            userId : 1
-        };
-
-    $scope.loadAllPageTasks = function (pageIndex = 1) {
+    $scope.loadTasks = function (pageIndex = 1) {
         $scope.tasksRequest.page = pageIndex;
         $http({
             url: 'http://localhost:5555/core/tasks',
@@ -24,6 +19,5 @@ angular.module('taskmanager').controller('allTasksController', function ($scope,
         }
         $scope.pagesList = out;
     }
-    $scope.loadAllPageTasks();
-
+    $scope.loadTasks();
 });

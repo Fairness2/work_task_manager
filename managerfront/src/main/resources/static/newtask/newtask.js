@@ -1,4 +1,4 @@
-angular.module('taskmanager').controller('newTaskController', function ($scope, $http) {
+angular.module('taskmanager').controller('newTaskController', function ($scope, $rootScope, $http) {
     $scope.newTask = {
         title: "",
         description: "",
@@ -30,7 +30,7 @@ angular.module('taskmanager').controller('newTaskController', function ($scope, 
         });
     };
 
-    $scope.isFieldsOk = function () {
+    $rootScope.isFieldsNewTaskOk = function () {
         if (($scope.newTask.title !== undefined && $scope.newTask.description !== undefined) &&
             ($scope.newTask.title !== '' && $scope.newTask.description !== '') &&
             $scope.newTask.employerId > 0 && $scope.newTask.responsibleUserId > 0) {
