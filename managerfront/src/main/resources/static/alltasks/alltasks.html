@@ -24,8 +24,15 @@
             <td>{{t.workingHours}}</td>
             <td>{{t.planStartDate}}</td>
             <td>{{t.planEndDate}}</td>
-            <td>{{t.currentStatus.status.title}}</td>
+            <td>{{t.historyStatus.status.title}}</td>
         </tr>
         </tbody>
     </table>
+    <nav aria-label="Страница">
+        <ul class="pagination">
+            <li class="page-item" ng-repeat="pageIndex in pageList">
+                <button class="page-link" ng-click="loadAllPageTasks(pageIndex)">{{pageIndex}}</button>
+            </li>
+        </ul>
+    </nav>
 </div>
