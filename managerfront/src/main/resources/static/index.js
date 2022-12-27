@@ -14,9 +14,9 @@
                 templateUrl: 'register/register.html',
                 controller: 'registerController'
             })
-            .when('/tasks', {
-                templateUrl: 'tasks/tasks.html',
-                controller: 'tasksController'
+            .when('/alltasks', {
+                templateUrl: 'alltasks/alltasks.html',
+                controller: 'allTasksController'
             })
             .when('/mytasks', {
                 templateUrl: 'mytasks/mytasks.html',
