@@ -3,17 +3,18 @@ package ru.gb.worktaskmanager.managercore.controllers;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.gb.worktaskmanager.managercore.dtos.RequestCreateTaskDto;
-import ru.gb.worktaskmanager.managercore.dtos.TaskDto;
-import ru.gb.worktaskmanager.managercore.dtos.TaskListDto;
-import ru.gb.worktaskmanager.managercore.dtos.TaskRequestDto;
+import ru.gb.worktaskmanager.managercore.converters.TaskEditConverter;
+import ru.gb.worktaskmanager.managercore.dtos.*;
 import ru.gb.worktaskmanager.managercore.entites.Task;
 import ru.gb.worktaskmanager.managercore.mappers.TaskMapper;
+import ru.gb.worktaskmanager.managercore.repositories.TaskRepository;
 import ru.gb.worktaskmanager.managercore.repositories.specifications.TaskSpecifications;
 import ru.gb.worktaskmanager.managercore.services.TaskService;
 
@@ -28,13 +29,10 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/tasks")
 @Validated
+@RequiredArgsConstructor
 public class TaskController {
     private final TaskService service;
-
-    @Autowired
-    public TaskController(TaskService service) {
-        this.service = service;
-    }
+    private final TaskEditConverter taskEditConverter;
 
     @Operation(
             summary = "Получение списка всех заданий для конкретного пользователя",
@@ -110,4 +108,32 @@ public class TaskController {
 
         return (new TaskMapper()).map(newTask);
     }
+
+    @Operation(
+            summary = "Удаление задания по id",
+            responses = {
+                    @ApiResponse(
+                            description = "Задание удалено", responseCode = "200"
+                    )
+            }
+    )
+    @DeleteMapping("/{id}")
+    public void removeTask(@PathVariable @Parameter(description = "id задания", required = true) Long id){
+        service.removeTaskById(id);
+    }
+
+    @Operation(
+            summary = "Редактиование задания",
+            responses = {
+                    @ApiResponse(
+                            description = "Задание отредактировано", responseCode = "200"
+                    )
+            }
+    )
+    @PatchMapping
+    public void editTask(@RequestBody @Valid RequestEditTaskDto editTaskDto) {
+        Task editedTask = service.getTaskById(editTaskDto.getId());
+        service.editTask(taskEditConverter.editTaskFromDto(editedTask, editTaskDto));
+    }
+
 }
