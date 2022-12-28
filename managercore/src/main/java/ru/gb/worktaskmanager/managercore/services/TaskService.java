@@ -39,6 +39,10 @@ public class TaskService {
         return repository.findAll(specification, PageRequest.of(page - 1, perPage));
     }
 
+    public Task getTaskById(Long id) {
+        return repository.findById(id).get();
+    }
+
     /**
      * Создание задания
      * @param taskDto

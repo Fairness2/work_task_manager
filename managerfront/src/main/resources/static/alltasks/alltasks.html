@@ -1,4 +1,4 @@
-<div xmlns="http://www.w3.org/1999/html">
+<div>
     <p></p>
     <h3>Все задания</h3>
     <p></p>
@@ -29,7 +29,7 @@
                         <td>{{t.planEndDate}}</td>
                         <td>{{t.historyStatus.status.title}}</td>
                         <td>
-                            <button type="button" class="btn btn-primary btn-sm">Просмотр</i></button>
+                            <button type="button" class="btn btn-primary btn-sm" ng-click="loadSingleTask(t.id)">Просмотр</i></button>
                         </td>
                     </tr>
                     </tbody>
@@ -37,9 +37,10 @@
             </div>
         </div>
     </div>
+    <p></p>
     <nav aria-label="Страница">
         <ul class="pagination">
-            <li class="page-item" ng-repeat="pageIndex in pageList">
+            <li class="page-item" ng-repeat="pageIndex in pagesList">
                 <button class="page-link" ng-click="loadTasks(pageIndex)">{{pageIndex}}</button>
             </li>
         </ul>

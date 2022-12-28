@@ -15,6 +15,7 @@ import ru.gb.worktaskmanager.managercore.repositories.specifications.TaskSpecifi
 import ru.gb.worktaskmanager.managercore.services.TaskService;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,14 +34,23 @@ public class TaskController {
         this.service = service;
     }
 
+    @Operation(
+            summary = "Получение списка всех заданий для конкретного пользователя",
+            responses = {
+                    @ApiResponse(
+                            description = "Список получен", responseCode = "200"
+                    )
+            }
+    )
     @GetMapping()
-    public TaskListDto getTasks(@RequestBody @Valid TaskRequestDto requestDto) {
-        //TODO по текущему пользователю
-        //TODO описание свагера
+    public TaskListDto getTasks(@RequestParam (name = "pageIndex", defaultValue = "1")  @Parameter(description = "Номер страницы", required = true) Integer pageIndex,
+                                @RequestParam (name = "userId", defaultValue = "1")  @Parameter(description = "id пользователя", required = true) Long userId) {
+        TaskRequestDto requestDto = new TaskRequestDto();
+        requestDto.setUserId(userId);
+        requestDto.setPage(pageIndex);
         Specification<Task> specification = TaskSpecifications.build(requestDto);
         int page = requestDto.getPage() == null ? 1 : requestDto.getPage();
         Page<Task> taskPage = service.getTasks(page, specification);
-        //TODO DTO mapper
         List<TaskDto> taskDtos = taskPage.getContent()
                 .stream()
                 .map(task -> (new TaskMapper()).map(task))
@@ -70,10 +80,30 @@ public class TaskController {
         return new TaskListDto(taskDtos, page, taskPage.getTotalPages());
     }
 
+    @Operation(
+            summary = "Получение задания по id",
+            responses = {
+                    @ApiResponse(
+                            description = "Задание получено", responseCode = "200"
+                    )
+            }
+    )
+    @GetMapping("/{id}")
+    public TaskDto getAllTasks(@PathVariable @Parameter(description = "id задания", required = true) Long id) {
+        return (new TaskMapper()).map(service.getTaskById(id));
+    }
+
+    @Operation(
+            summary = "Создание нового задания",
+            responses = {
+                    @ApiResponse(
+                            description = "Задание создано", responseCode = "201"
+                    )
+            }
+    )
     @PostMapping()
     public TaskDto createTask(@RequestBody @Valid RequestCreateTaskDto createTaskDto) {
         //TODO Создание задания с подстановкой текущего пользователя
-        //TODO описание свагера
         Task newTask = service.createTask(createTaskDto);
 
         return (new TaskMapper()).map(newTask);
