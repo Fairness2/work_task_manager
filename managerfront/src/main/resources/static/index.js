@@ -26,6 +26,10 @@
                 templateUrl: 'newtask/newtask.html',
                 controller: 'newTaskController'
             })
+            .when('/singletask', {
+                templateUrl: 'singletask/singletask.html',
+                controller: 'singleTaskController'
+            })
             .otherwise({
                 redirectTo: '/'
             });

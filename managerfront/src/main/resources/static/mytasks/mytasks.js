@@ -1,22 +1,27 @@
-angular.module('taskmanager').controller('myTasksController', function ($scope, $http) {
-    $scope.loadMyTasks = function () {
+angular.module('taskmanager').controller('myTasksController', function ($scope, $http, $localStorage, $location) {
+    $scope.loadMyTasks = function (pageIndex = 1) {
         $http({
-            url: 'http://localhost:5555/core/tasks/my',
-            method: 'GET'
+            url: 'http://localhost:5555/core/tasks',
+            method: 'GET',
+            params: {
+                pageIndex: pageIndex,
+                userId: $localStorage.workTaskUser.id
+            }
         }).then(function (response) {
             $scope.myTasks = response.data;
+            $scope.generatePagesListMyTasks($scope.myTasks.total);
         });
     };
-    //TODO получение по DTO
-    //     $scope.tasksRequest = {
-    //         page: pageIndex,
-    //         userId: $localStorage.workTaskUser.id
-    //     };
-    //     $http.get('http://localhost:5555/core/tasks', $scope.tasksRequest)
-    //         .then(function (response) {
-    //         $scope.allTasks = response.data;
-    //         $scope.generatePagesList($scope.allTasks.total);
-    //     });
-    // };
+    $scope.generatePagesListMyTasks = function (total) {
+        out = [];
+        for (let i = 0; i < total; i++) {
+            out.push(i + 1);
+        }
+        $scope.pagesListMyTasks = out;
+    }
+    $scope.loadMySingleTask = function (id) {
+        $localStorage.currentTaskViewId = id;
+        $location.path('/singletask');
+    }
     $scope.loadMyTasks();
 });

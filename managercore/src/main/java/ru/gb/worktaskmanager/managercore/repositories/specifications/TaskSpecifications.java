@@ -22,4 +22,10 @@ public class TaskSpecifications {
                 .equal(root.get("employerId"), userId)
         );
     }
+
+    public static Specification<Task> taskEqual(Long id) {
+        return ((root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
+                .equal(root.get("id"), id)
+        );
+    }
 }

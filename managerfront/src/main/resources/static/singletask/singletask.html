@@ -1,0 +1,38 @@
+<div>
+    <p></p>
+    <h4>Задание № {{singleTask.id}}</h4>
+    <p></p>
+    <div class="container">
+
+
+        <form>
+            <fieldset disabled>
+                <div class="form-group">
+                    <label for="descriptionArea">Описание задания</label>
+                    <textarea class="form-control" id="descriptionArea" rows="5">{{singleTask.description}}</textarea>
+                </div>
+                <p></p>
+                <label>Автор: {{singleTask.author.surname}} {{singleTask.author.name}} {{singleTask.author.patronymic}}</label>
+                <p></p>
+                <p></p>
+            </fieldset>
+        </form>
+
+        <form>
+            <div class="form-group">
+                <label for="commentsArea">Комментарии к заданию</label>
+                <textarea class="form-control" id="commentsArea" rows="7"></textarea>
+            </div>
+            <p></p>
+
+            <input id="comment" placeholder="напишите комментарий" value="" class="form-control" ng-model="newComment" type="text"
+                   aria-describedby="inputGroup-sizing-sm">
+            <p></p>
+            <button class="btn btn-primary" ng-click="createNewComment()">Отправить</button>
+        </form>
+
+
+
+
+    </div>
+</div>
