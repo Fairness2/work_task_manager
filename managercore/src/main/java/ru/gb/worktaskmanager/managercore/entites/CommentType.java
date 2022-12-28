@@ -1,12 +1,12 @@
 package ru.gb.worktaskmanager.managercore.entites;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Справочник типов комментариев
@@ -15,6 +15,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "d_comment_type")
 @NoArgsConstructor
+@EqualsAndHashCode
 public class CommentType {
     @Id
     @NaturalId
@@ -31,6 +32,9 @@ public class CommentType {
         this.title = title;
     }
 
+    /*
+    Я посмотрел реализации, если делать константой, то будут проблемы с коллекциями основанными на мапах.
+    В итоге реализация как у ломбок довольно монструозная https://projectlombok.org/features/EqualsAndHashCode, но вроде как решает такие проблемы
     @Override
     public int hashCode() {
         return Objects.hashCode(code);
@@ -42,7 +46,7 @@ public class CommentType {
         if (o == null || getClass() != o.getClass()) return false;
         CommentType that = (CommentType) o;
         return Objects.equals(code, that.code);
-    }
+    }*/
 
     @Override
     public String toString() {

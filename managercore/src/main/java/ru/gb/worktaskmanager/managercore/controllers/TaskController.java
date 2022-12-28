@@ -91,7 +91,7 @@ public class TaskController {
             }
     )
     @GetMapping("/{id}")
-    public TaskDto getAllTasks(@PathVariable @Parameter(description = "id задания", required = true) Long id) {
+    public TaskDto getTask(@PathVariable @Parameter(description = "id задания", required = true) Long id) {
         return (new TaskMapper()).map(service.getTaskById(id));
     }
 

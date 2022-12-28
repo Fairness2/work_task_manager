@@ -1,9 +1,6 @@
 package ru.gb.worktaskmanager.managercore.entites;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -12,7 +9,6 @@ import ru.gb.worktaskmanager.managercore.dtos.UserDto;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 /**
  * Справочник комментариев
@@ -23,6 +19,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode
 public class Comment {
 
     @Id
@@ -75,8 +72,12 @@ public class Comment {
         return this.task.getId();
     }
 
+    /*
+    Я посмотрел реализации, если делать константой, то будут проблемы с коллекциями основанными на мапах.
+    В итоге реализация как у ломбок довольно монструозная https://projectlombok.org/features/EqualsAndHashCode, но вроде как решает такие проблемы
     @Override
     public int hashCode() {
+
         return Objects.hashCode(id);
     }
 
@@ -86,7 +87,7 @@ public class Comment {
         if (o == null || getClass() != o.getClass()) return false;
         Comment task = (Comment) o;
         return Objects.equals(id, task.id);
-    }
+    }*/
 
     @Override
     public String toString() {
