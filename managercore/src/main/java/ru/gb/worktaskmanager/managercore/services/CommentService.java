@@ -1,6 +1,6 @@
 package ru.gb.worktaskmanager.managercore.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
@@ -15,27 +15,14 @@ import java.time.LocalDateTime;
  * Сервис комментариев к заданиям
  */
 @Service
+@RequiredArgsConstructor
 public class CommentService {
     private final CommentRepository repository;
     private final CommentTypeRepository typeRepository;
     private final TaskRepository taskRepository;
     private final TaskStatusRepository statusRepository;
     private final RefTaskStatusRepository refTaskStatusRepository;
-
-    @Autowired
-    public CommentService(
-            CommentRepository repository,
-            CommentTypeRepository typeRepository,
-            TaskRepository taskRepository,
-            TaskStatusRepository statusRepository,
-            RefTaskStatusRepository refTaskStatusRepository
-    ) {
-        this.repository = repository;
-        this.typeRepository = typeRepository;
-        this.taskRepository = taskRepository;
-        this.statusRepository = statusRepository;
-        this.refTaskStatusRepository = refTaskStatusRepository;
-    }
+    private final UserService userService;
 
     /**
      * Дефолтное кол-во на странице
@@ -63,7 +50,7 @@ public class CommentService {
 
         Comment comment = Comment.builder()
                 .text(commentDto.getText())
-                .authorId(commentDto.getAuthorId()) // TODO из авторизованного пользователя
+                .authorId(userService.findUserById(commentDto.getAuthorId())) // TODO из авторизованного пользователя
                 .task(task)
                 .type(type)
                 .build();
@@ -105,21 +92,21 @@ public class CommentService {
             taskStatus = RefTaskStatus.builder()
                     .status(status)
                     .task(comment.getTask())
-                    .userId(comment.getAuthorId())
+                    .userId(comment.getAuthorId().getId())
                     .build();
         } else if (comment.getType().getCode().equals(CommentTypeEnum.pause_request.name())) {
             TaskStatus status = statusRepository.getReferenceById(TaskStatusEnum.paused.name());
             taskStatus = RefTaskStatus.builder()
                     .status(status)
                     .task(comment.getTask())
-                    .userId(comment.getAuthorId())
+                    .userId(comment.getAuthorId().getId())
                     .build();
         } else { // Значит завершение
             TaskStatus status = statusRepository.getReferenceById(TaskStatusEnum.done.name());
             taskStatus = RefTaskStatus.builder()
                     .status(status)
                     .task(comment.getTask())
-                    .userId(comment.getAuthorId())
+                    .userId(comment.getAuthorId().getId())
                     .build();
         }
         // У нас всегда должен быть только один открытый статус

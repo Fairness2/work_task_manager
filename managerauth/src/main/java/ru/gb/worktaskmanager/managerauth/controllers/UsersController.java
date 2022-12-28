@@ -1,10 +1,12 @@
 package ru.gb.worktaskmanager.managerauth.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.gb.worktaskmanager.managerauth.converters.UserToDtoConverter;
@@ -22,16 +24,21 @@ public class UsersController {
     private final UserService userService;
     private final UserToDtoConverter userToDtoConverter;
 
-//    @Operation(
-//            summary = "Получение списка всех пользователей",
-//            responses = {
-//                    @ApiResponse(
-//                            description = "Список получен", responseCode = "201"
-//                    )
-//            }
-//    )
+    @Operation(
+            summary = "Получение списка всех пользователей",
+            responses = {
+                    @ApiResponse(
+                            description = "Список получен", responseCode = "200"
+                    )
+            }
+    )
     @GetMapping("/find-all")
     public UserListDto findAllUsers() {
         return userToDtoConverter.userListConvertToDto(userService.findAllUsers());
+    }
+
+    @GetMapping("/{id}")
+    public UserDto findUserById(@PathVariable @Parameter(description = "id пользователя", required = true) Long id) {
+        return userToDtoConverter.userConvertToDto(userService.findUserById(id));
     }
 }
