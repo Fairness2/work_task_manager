@@ -8,14 +8,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.gb.worktaskmanager.managercore.dtos.*;
+import ru.gb.worktaskmanager.managercore.dtos.RequestCreateTaskDto;
+import ru.gb.worktaskmanager.managercore.dtos.TaskDto;
+import ru.gb.worktaskmanager.managercore.dtos.TaskListDto;
+import ru.gb.worktaskmanager.managercore.dtos.TaskRequestDto;
 import ru.gb.worktaskmanager.managercore.entites.Task;
 import ru.gb.worktaskmanager.managercore.mappers.TaskMapper;
 import ru.gb.worktaskmanager.managercore.repositories.specifications.TaskSpecifications;
 import ru.gb.worktaskmanager.managercore.services.TaskService;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.stream.Collectors;
 
