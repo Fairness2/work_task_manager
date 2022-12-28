@@ -4,17 +4,14 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.worktaskmanager.managercore.converters.TaskEditConverter;
 import ru.gb.worktaskmanager.managercore.dtos.*;
 import ru.gb.worktaskmanager.managercore.entites.Task;
 import ru.gb.worktaskmanager.managercore.mappers.TaskMapper;
-import ru.gb.worktaskmanager.managercore.repositories.TaskRepository;
 import ru.gb.worktaskmanager.managercore.repositories.specifications.TaskSpecifications;
 import ru.gb.worktaskmanager.managercore.services.TaskService;
 
