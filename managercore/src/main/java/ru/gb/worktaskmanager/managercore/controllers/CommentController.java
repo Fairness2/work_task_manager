@@ -1,5 +1,6 @@
 package ru.gb.worktaskmanager.managercore.controllers;
 
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
@@ -31,11 +32,12 @@ public class CommentController {
     }
 
     @GetMapping()
-    public CommentListResponseDto getComments(@RequestBody @Valid CommentRequestDto requestDto) {
+    public CommentListResponseDto getComments(@RequestParam (name = "page", defaultValue = "1")  @Parameter(description = "Номер страницы", required = true) Integer pageIndex,
+                                              @RequestParam (name = "taskId", defaultValue = "1")  @Parameter(description = "id пользователя", required = true) Long taskId) {
         //TODO по текущему пользователю
         //TODO описание свагера
-        Specification<Comment> specification = CommentSpecifications.build(requestDto);
-        int page = requestDto.getPage() == null ? 1 : requestDto.getPage();
+        Specification<Comment> specification = CommentSpecifications.build(taskId, pageIndex);
+        int page = pageIndex == null ? 1 : pageIndex;
         Page<Comment> taskPage = service.getComments(page, specification);
         //TODO DTO mapper
         List<CommentResponseDto> commentDtos = taskPage.getContent()

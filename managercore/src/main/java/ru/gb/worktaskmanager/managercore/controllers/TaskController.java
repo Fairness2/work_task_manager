@@ -42,11 +42,9 @@ public class TaskController {
     @GetMapping()
     public TaskListDto getTasks(@RequestParam (name = "pageIndex", defaultValue = "1")  @Parameter(description = "Номер страницы", required = true) Integer pageIndex,
                                 @RequestParam (name = "userId", defaultValue = "1")  @Parameter(description = "id пользователя", required = true) Long userId) {
-        TaskRequestDto requestDto = new TaskRequestDto();
-        requestDto.setUserId(userId);
-        requestDto.setPage(pageIndex);
-        Specification<Task> specification = TaskSpecifications.build(requestDto);
-        int page = requestDto.getPage() == null ? 1 : requestDto.getPage();
+
+        Specification<Task> specification = TaskSpecifications.build(userId, pageIndex);
+        int page = pageIndex == null ? 1 : pageIndex;
         Page<Task> taskPage = service.getTasks(page, specification);
         List<TaskDto> taskDtos = taskPage.getContent()
                 .stream()

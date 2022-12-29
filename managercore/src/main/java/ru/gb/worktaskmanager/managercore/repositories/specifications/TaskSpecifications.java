@@ -7,10 +7,10 @@ import ru.gb.worktaskmanager.managercore.entites.Task;
 import java.util.List;
 
 public class TaskSpecifications {
-    public static Specification<Task> build(TaskRequestDto requestDto) {
+    public static Specification<Task> build(Long userId, Integer page) {
         Specification<Task> specification = Specification.where(null);
-        if (requestDto.getUserId() != null) {
-            specification = specification.and(TaskSpecifications.userEqual(requestDto.getUserId()));
+        if (userId != null) {
+            specification = specification.and(TaskSpecifications.userEqual(userId));
         }
         //TODO остальные параметры фильтрации
 

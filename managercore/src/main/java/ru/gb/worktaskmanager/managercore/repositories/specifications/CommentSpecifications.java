@@ -8,10 +8,10 @@ import ru.gb.worktaskmanager.managercore.entites.Task;
 import javax.persistence.criteria.Join;
 
 public class CommentSpecifications {
-    public static Specification<Comment> build(CommentRequestDto requestDto) {
+    public static Specification<Comment> build(Long taskId, Integer page) {
         Specification<Comment> specification = Specification.where(null);
-        if (requestDto.getTaskId() != null) {
-            specification = specification.and(CommentSpecifications.taskEqual(requestDto.getTaskId()));
+        if (taskId != null) {
+            specification = specification.and(CommentSpecifications.taskEqual(taskId));
         }
         //TODO остальные параметры фильтрации
 
