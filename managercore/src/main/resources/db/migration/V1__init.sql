@@ -10,11 +10,16 @@ create table users
     updated_at      timestamp default current_timestamp
 );
 
+INSERT INTO  users (username, password, name, surname, patronymic) VALUES
+                                                                       ('bob', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'bob', 'woods', 'bobs'),
+                                                                       ('john', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'john', 'johnson', 'johns');
 create table roles
 (
     code            varchar(50) primary key,
     title           varchar(255) not null
 );
+
+INSERT INTO roles (code, title) VALUES ('ROLE_ADMIN', 'Руководитель'), ('ROLE_USER', 'Работник');
 
 create table ref_user_role
 (
@@ -25,17 +30,9 @@ create table ref_user_role
     primary key (user_id, role_code)
 );
 
-insert into roles (code, title)
-values ('ROLE_ADMIN', 'Руководитель'),
-       ('ROLE_USER', 'Работник');
-
-insert into users (username, password, name, surname, patronymic)
-values ('bob', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'bob', 'woods', 'bobs'),
-       ('john', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'john', 'johnson', 'johns');
-
-insert into ref_user_role (user_id, role_code)
-values (1, 'ROLE_ADMIN'),
-       (2,'ROLE_USER');
+INSERT INTO ref_user_role (user_id, role_code) VALUES
+                                                   (1, 'ROLE_ADMIN'),
+                                                   (2,'ROLE_USER');
 
 create table t_task
 (

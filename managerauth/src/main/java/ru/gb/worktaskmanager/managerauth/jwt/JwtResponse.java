@@ -12,5 +12,4 @@ public class JwtResponse {
     @Schema(description = "Возвращенный токен", required = true)
     private String token;
     private Long id;
-    private String role;
 }
