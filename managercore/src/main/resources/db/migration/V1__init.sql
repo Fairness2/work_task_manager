@@ -12,20 +12,30 @@ create table users
 
 create table roles
 (
-    code        bigserial primary key,
-    title       varchar(50) not null,
-    created_at  timestamp default current_timestamp,
-    updated_at  timestamp default current_timestamp
+    code            varchar(50) primary key,
+    title           varchar(255) not null
 );
 
 create table ref_user_role
 (
     user_id     bigint not null references users (id),
-    role_code   bigint not null references roles (code),
+    role_code   varchar references roles (code),
     created_at  timestamp default current_timestamp,
     updated_at  timestamp default current_timestamp,
     primary key (user_id, role_code)
 );
+
+insert into roles (code, title)
+values ('ROLE_ADMIN', 'Руководитель'),
+       ('ROLE_USER', 'Работник');
+
+insert into users (username, password, name, surname, patronymic)
+values ('bob', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'bob', 'woods', 'bobs'),
+       ('john', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'john', 'johnson', 'johns');
+
+insert into ref_user_role (user_id, role_code)
+values (1, 'ROLE_ADMIN'),
+       (2,'ROLE_USER');
 
 create table t_task
 (
@@ -118,14 +128,14 @@ create table t_files
     updated_at      timestamp default current_timestamp
 );
 
-insert into roles (title)
-values ('USER'),
-       ('ADMIN');
-
-insert into users (username, password, name, surname, patronymic)
-values ('bob', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'bob', 'woods', 'bobs'),
-       ('john', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'john', 'johnson', 'johns');
-
-insert into ref_user_role (user_id, role_code)
-values (1, 1),
-       (2,2);
+-- insert into roles (code, title)
+-- values ('ROLE_USER', 'Работник'),
+--        ('ROLE_ADMIN', 'Руководитель');
+--
+-- insert into users (username, password, name, surname, patronymic)
+-- values ('joe', '$2y$10$TkqzprV3F7VsCOenwxEcUeHVhVsn9GLWEN.EQLLtsf7EdTRpzQ0qi', 'bob', 'woods', 'bobs'),
+--        ('stan', '$2y$10$TkqzprV3F7VsCOenwxEcUeHVhVsn9GLWEN.EQLLtsf7EdTRpzQ0qi', 'stan', 'micleson', 'johns');
+--
+-- insert into ref_user_role (user_id, role_code)
+-- values (1, 'ROLE_USER'),
+--        (2,'ROLE_ADMIN');

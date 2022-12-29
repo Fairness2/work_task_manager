@@ -1,33 +1,38 @@
 package ru.gb.worktaskmanager.managerauth.entities;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Data
-@EqualsAndHashCode
-@RequiredArgsConstructor
+@ToString
+@NoArgsConstructor
 @Table(name = "roles")
 public class Roles {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NaturalId
     @Column(name = "code")
-    private Long code;
+    private String code;
 
     @Column(name = "title")
     private String title;
 
-    @CreationTimestamp
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(code);
+    }
 
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Roles that = (Roles) o;
+        return Objects.equals(code, that.code);
+    }
 }

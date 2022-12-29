@@ -8,8 +8,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.gb.worktaskmanager.managerauth.converters.UserToDtoConverter;
-import ru.gb.worktaskmanager.managerauth.dtos.UserListDto;
 import ru.gb.worktaskmanager.managerauth.entities.Roles;
 import ru.gb.worktaskmanager.managerauth.entities.Users;
 import ru.gb.worktaskmanager.managerauth.repositories.UserRepository;
@@ -54,4 +52,5 @@ public class UserService implements UserDetailsService {
     public Users findUserById(Long id) {
         return userRepository.findById(id).get();
     }
+
 }
