@@ -38,14 +38,17 @@ public class Task {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "employer_id")
-    private Long employerId;
+    @ManyToOne
+    @JoinColumn(name = "employer_id")
+    private Users employerId;
 
-    @Column(name = "author_id")
-    private Long authorId;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private Users authorId;
 
-    @Column(name = "responsible_user_id")
-    private Long responsibleUserId;
+    @ManyToOne
+    @JoinColumn(name = "responsible_user_id")
+    private Users responsibleUserId;
 
     @Column(name = "working_hours")
     private Integer workingHours;
@@ -76,35 +79,41 @@ public class Task {
     private List<Comment> comments;
 
     /**
-     * Получим данные работника из сервиса пользователей
      * @return UserDto
      */
     public UserDto getEmployer() {
-        //TODO связь с сервисом пользователя и получение данных из него
         return UserDto.builder()
-                .id(this.employerId)
+                .id(this.employerId.getId())
+                .name(this.employerId.getName())
+                .surname(this.employerId.getSurname())
+                .patronymic(this.employerId.getPatronymic())
+                .username(this.employerId.getUsername())
                 .build();
     }
 
     /**
-     * Получим данные автора из сервиса пользователей
      * @return UserDto
      */
     public UserDto getAuthor() {
-        //TODO связь с сервисом пользователя и получение данных из него
         return UserDto.builder()
-                .id(this.authorId)
+                .id(this.authorId.getId())
+                .name(this.authorId.getName())
+                .surname(this.authorId.getSurname())
+                .patronymic(this.authorId.getPatronymic())
+                .username(this.authorId.getUsername())
                 .build();
     }
 
     /**
-     * Получим данные ответственного на данный момент пользователя из сервиса пользователей
      * @return UserDto
      */
     public UserDto getResponsibleUser() {
-        //TODO связь с сервисом пользователя и получение данных из него
         return UserDto.builder()
-                .id(this.responsibleUserId)
+                .id(this.responsibleUserId.getId())
+                .name(this.responsibleUserId.getName())
+                .surname(this.responsibleUserId.getSurname())
+                .patronymic(this.responsibleUserId.getPatronymic())
+                .username(this.responsibleUserId.getUsername())
                 .build();
     }
 

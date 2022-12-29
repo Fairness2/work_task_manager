@@ -29,8 +29,9 @@ public class Comment {
     @Column(name = "text")
     private String text;
 
-    @Column(name = "author_id")
-    private Long authorId;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private Users authorId;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -57,13 +58,15 @@ public class Comment {
 
 
     /**
-     * Получим данные автора из сервиса пользователей
      * @return UserDto
      */
     public UserDto getAuthor() {
-        //TODO связь с сервисом пользователя и получение данных из него
         return UserDto.builder()
-                .id(this.authorId)
+                .id(this.authorId.getId())
+                .name(this.authorId.getName())
+                .surname(this.authorId.getSurname())
+                .patronymic(this.authorId.getPatronymic())
+                .username(this.authorId.getUsername())
                 .build();
     }
 

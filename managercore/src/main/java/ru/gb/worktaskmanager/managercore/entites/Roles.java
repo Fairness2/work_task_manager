@@ -1,4 +1,4 @@
-package ru.gb.worktaskmanager.managerauth.entities;
+package ru.gb.worktaskmanager.managercore.entites;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

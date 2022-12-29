@@ -1,5 +1,6 @@
 package ru.gb.worktaskmanager.managercore.services;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,13 +17,10 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class TaskService {
     private final TaskRepository repository;
-
-    @Autowired
-    public TaskService(TaskRepository taskRepository) {
-        this.repository = taskRepository;
-    }
+    private final UserService userService;
 
     /**
      * Дефолтное кол-во на странице
@@ -52,9 +50,9 @@ public class TaskService {
         Task task = Task.builder()
                 .title(taskDto.getTitle())
                 .description(taskDto.getDescription())
-                .employerId(taskDto.getEmployerId())
-                .authorId(taskDto.getAuthorId()) // TODO из авторизованного пользователя
-                .responsibleUserId(taskDto.getResponsibleUserId())
+                .employerId(userService.findUserById(taskDto.getEmployerId()))
+                .authorId(userService.findUserById(taskDto.getAuthorId())) // TODO из авторизованного пользователя
+                .responsibleUserId(userService.findUserById(taskDto.getResponsibleUserId()))
                 .workingHours(taskDto.getWorkingHours())
                 .planStartDate(taskDto.getPlanStartDate())
                 .planEndDate(taskDto.getPlanEndDate())
@@ -63,7 +61,7 @@ public class TaskService {
         RefTaskStatus taskStatus = RefTaskStatus.builder()
                 .status(new TaskStatus(TaskStatusEnum.pending.name(), TaskStatusEnum.pending.name()))
                 .task(task)
-                .userId(task.getAuthorId())
+                .userId(task.getAuthorId().getId())
                 .build();
 
         task.setTaskStatuses(Arrays.stream(new RefTaskStatus[]{taskStatus})
@@ -72,5 +70,13 @@ public class TaskService {
         task = repository.save(task);
 
         return task;
+    }
+
+    public void removeTaskById(Long id) {
+        repository.deleteById(id);
+    }
+
+    public void editTask(Task task) {
+        repository.save(task);
     }
 }
