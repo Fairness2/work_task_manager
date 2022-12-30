@@ -44,5 +44,5 @@
     <input id="navRetypePasswordField" placeholder="Повтор пароля" class="form-control" ng-model="newUser.confirmPassword" type="password"
            aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">
     <p></p>
-    <button ng-show="isFieldsOk()" class="btn btn-primary" ng-click="checkToRegister(newUser)">Создать нового пользователя</button>
+    <button ng-show="isFieldsRegisterOk()" class="btn btn-primary" ng-click="registerNewUser()">Создать нового пользователя</button>
 </div>

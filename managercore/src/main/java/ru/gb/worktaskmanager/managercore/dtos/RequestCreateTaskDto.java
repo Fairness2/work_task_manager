@@ -15,47 +15,38 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-@DateGreaterOrEqualsThan.List({
-        @DateGreaterOrEqualsThan(
-                field = "planEndDate",
-                secondField = "planStartDate",
-                message = "Плановая дата начала не может быть меньше плановой даты завершения"
-        )
-})
 public class RequestCreateTaskDto {
-    @Size(min = 2, max = 255, message = "Заголовок должнен содержать от 2-х до 255-и символов")
     @NotBlank(message = "Заголовок не может быть пустым")
+    @Size(min = 2, max = 255, message = "Заголовок должен содержать от 2-х до 255-и символов")
     private String title;
 
-    @Size(min = 2, message = "Описание должно содержать от 2-х символов")
     @NotBlank(message = "Заголовок не может быть пустым")
+    @Size(min = 2, message = "Описание должно содержать от 2-х символов")
     private String description;
 
+    @NotNull(message = "Работник не может быть пустым")
     @UserExist(message = "Такого работника не существует")
     @UserWithRole(role = "employer", message = "Работник не заявлен как работник")
-    @NotNull(message = "Работник не может быть пустым")
-    private Integer employerId;
+    private Long employerId;
 
+    @NotNull(message = "Автор не может быть пустым")
     @UserExist(message = "Автора не существует")
     @UserWithRole(role = "director", message = "Автор не заявлен как руководитель")
-    @NotNull(message = "Автор не может быть пустым")
-    private Integer authorId; // TODO подставлять из принципала
+    private Long authorId; // TODO подставлять из принципала
 
+    @NotNull(message = "Ответственный не может быть пустым")
     @UserExist(message = "Ответственного не существует")
     @UserWithRole(role = "employer", message = "Ответственный не заявлен как работник")
-    @NotNull(message = "Ответственный не может быть пустым")
-    private Integer responsibleUserId;
+    private Long responsibleUserId;
 
-    @Positive
-    @NotNull(message = "Число рабочих числов должно быть заполнено")
+    @NotNull(message = "Число рабочих часов должно быть заполнено")
+    @Positive(message = "Число рабочих часов должно быть больше 0")
     private Integer workingHours;
 
     @NotNull(message = "Планируемая дата начала должна быть заполнена")
-    @DateGreaterOrEqualsThanNow(message = "Планируемая дата начала должна быть больше текущей даты")
     private LocalDateTime planStartDate;
 
     @NotNull(message = "Планируемая дата окончкания должна быть заполнена")
-    @DateGreaterOrEqualsThanNow(message = "Планируемая дата окончкания должна быть больше текущей даты")
     private LocalDateTime planEndDate;
 
 }

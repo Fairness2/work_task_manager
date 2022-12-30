@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import ru.gb.worktaskmanager.managercore.entites.Task;
 
 @Repository
-public interface TaskRepository extends JpaRepository<Task, Integer>, JpaSpecificationExecutor<Task> {
+public interface TaskRepository extends JpaRepository<Task, Long>, JpaSpecificationExecutor<Task> {
 
 }

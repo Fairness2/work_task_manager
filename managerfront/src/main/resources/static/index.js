@@ -14,13 +14,21 @@
                 templateUrl: 'register/register.html',
                 controller: 'registerController'
             })
-            .when('/tasks', {
-                templateUrl: 'tasks/tasks.html',
-                controller: 'tasksController'
+            .when('/alltasks', {
+                templateUrl: 'alltasks/alltasks.html',
+                controller: 'allTasksController'
             })
             .when('/mytasks', {
                 templateUrl: 'mytasks/mytasks.html',
                 controller: 'myTasksController'
+            })
+            .when('/newtask', {
+                templateUrl: 'newtask/newtask.html',
+                controller: 'newTaskController'
+            })
+            .when('/singletask', {
+                templateUrl: 'singletask/singletask.html',
+                controller: 'singleTaskController'
             })
             .otherwise({
                 redirectTo: '/'
@@ -53,8 +61,8 @@ angular.module('taskmanager').controller('indexController', function ($rootScope
             .then(function successCallback(response) {
                 if (response.data.token) {
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
-                    $localStorage.workTaskUser = {username: $scope.user.username, token: response.data.token};
-
+                    $localStorage.workTaskUser = {username: $scope.user.username,
+                                                  token: response.data.token, id: response.data.id};
                     $scope.user.username = null;
                     $scope.user.password = null;
 

@@ -1,0 +1,64 @@
+<div>
+    <p></p>
+    <h4>Задание № {{singleTask.id}}</h4>
+    <p></p>
+    <div class="container">
+        <form>
+            <fieldset disabled>
+                <div class="form-group">
+                    <label for="descriptionArea">Описание задания</label>
+                    <textarea class="form-control" id="descriptionArea" rows="5">{{singleTask.description}}</textarea>
+                </div>
+                <p></p>
+                <label>Автор: {{singleTask.author.surname}} {{singleTask.author.name}} {{singleTask.author.patronymic}}</label>
+                <p></p>
+                <p></p>
+            </fieldset>
+        </form>
+<!--        <div class="container">-->
+<!--            <div class="row">-->
+<!--                <div class="col-12">-->
+<!--                    <table class="table table-bordered">-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                            <th scope="col">Комментарии</th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                        <tr ng-repeat="с in allComments">-->
+<!--                            <td>{{mt.id}}</td>-->
+<!--                            <td>{{mt.title}}</td>-->
+<!--                            <td>{{mt.author.username}}</td>-->
+<!--                            <td>{{mt.workingHours}}</td>-->
+<!--                            <td>{{mt.planStartDate}}</td>-->
+<!--                            <td>{{mt.planEndDate}}</td>-->
+<!--                            <td>{{mt.currentStatus.status.title}}</td>-->
+<!--                            <td>-->
+<!--                                <button type="button" class="btn btn-primary btn-sm" ng-click="loadMySingleTask(mt.id)">Просмотр</i></button>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        -->
+        <form>
+            <fieldset disabled>
+            <div class="form-group">
+                <label for="commentsArea">Комментарии к заданию</label>
+                <textarea class="form-control" id="commentsArea" rows="7">{{commentsText}}</textarea>
+            </div>
+            </fieldset>
+            <p></p>
+            <input id="comment" placeholder="напишите комментарий" value="" class="form-control" ng-model="newComment.text" type="text"
+                   aria-describedby="inputGroup-sizing-sm">
+            <p></p>
+            <button class="btn btn-primary" ng-click="createNewComment()">Отправить</button>
+        </form>
+
+
+
+
+    </div>
+</div>

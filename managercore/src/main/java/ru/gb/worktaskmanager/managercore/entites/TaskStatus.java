@@ -1,6 +1,7 @@
 package ru.gb.worktaskmanager.managercore.entites;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
 
@@ -8,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Objects;
 
 /**
  * Справочник статусов заданий
@@ -17,6 +17,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "d_task_status")
 @NoArgsConstructor
+@EqualsAndHashCode
 public class TaskStatus {
     @Id
     @NaturalId
@@ -30,6 +31,9 @@ public class TaskStatus {
         this.title = title;
     }
 
+    /*
+    Я посмотрел реализации, если делать константой, то будут проблемы с коллекциями основанными на мапах.
+    В итоге реализация как у ломбок довольно монструозная https://projectlombok.org/features/EqualsAndHashCode, но вроде как решает такие проблемы
     @Override
     public int hashCode() {
         return Objects.hashCode(code);
@@ -41,7 +45,7 @@ public class TaskStatus {
         if (o == null || getClass() != o.getClass()) return false;
         TaskStatus that = (TaskStatus) o;
         return Objects.equals(code, that.code);
-    }
+    }*/
 
     @Override
     public String toString() {

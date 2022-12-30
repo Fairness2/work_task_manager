@@ -13,7 +13,7 @@ public class TaskRequestDto {
     private Integer page;
     @Positive
     @UserExist
-    private Integer userId;
+    private Long userId;
 
     //TODO остальные параметры фильтрации
 }

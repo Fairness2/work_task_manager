@@ -15,4 +15,5 @@ public class RefTaskStatusDto {
     private TaskStatusDto status;
     private String createdAt;
     private String endedAt;
+    private UserDto user;
 }

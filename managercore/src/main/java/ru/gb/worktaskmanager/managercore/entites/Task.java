@@ -1,7 +1,6 @@
 package ru.gb.worktaskmanager.managercore.entites;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -12,7 +11,6 @@ import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Справочник статусов заданий
@@ -21,11 +19,14 @@ import java.util.Objects;
 @Entity
 @Table(name = "t_task")
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@EqualsAndHashCode
 public class Task {
     /**
      * Стандартный формат даты
      */
-    private static final String dateFormat = "yyyy-MM-dd kk:mm";
+    private static final String dateFormat = "yyyy-MM-ddTkk:mm";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,14 +38,17 @@ public class Task {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "employer_id")
-    private Long employerId;
+    @ManyToOne
+    @JoinColumn(name = "employer_id")
+    private Users employerId;
 
-    @Column(name = "author_id")
-    private Long authorId;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private Users authorId;
 
-    @Column(name = "responsible_user_id")
-    private Long responsibleUserId;
+    @ManyToOne
+    @JoinColumn(name = "responsible_user_id")
+    private Users responsibleUserId;
 
     @Column(name = "working_hours")
     private Integer workingHours;
@@ -63,44 +67,53 @@ public class Task {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "task")
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<RefTaskStatus> taskStatuses;
 
-    @OneToMany(mappedBy = "task")
+    /*@OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<File> files;
+    private List<File> files;*/
+
+    @OneToMany(mappedBy = "task")
+    private List<Comment> comments;
 
     /**
-     * Получим данные работника из сервиса пользователей
      * @return UserDto
      */
     public UserDto getEmployer() {
-        //TODO связь с сервисом пользователя и получение данных из него
         return UserDto.builder()
-                .id(this.employerId)
+                .id(this.employerId.getId())
+                .name(this.employerId.getName())
+                .surname(this.employerId.getSurname())
+                .patronymic(this.employerId.getPatronymic())
+                .username(this.employerId.getUsername())
                 .build();
     }
 
     /**
-     * Получим данные автора из сервиса пользователей
      * @return UserDto
      */
     public UserDto getAuthor() {
-        //TODO связь с сервисом пользователя и получение данных из него
         return UserDto.builder()
-                .id(this.authorId)
+                .id(this.authorId.getId())
+                .name(this.authorId.getName())
+                .surname(this.authorId.getSurname())
+                .patronymic(this.authorId.getPatronymic())
+                .username(this.authorId.getUsername())
                 .build();
     }
 
     /**
-     * Получим данные ответственного на данный момент пользователя из сервиса пользователей
      * @return UserDto
      */
     public UserDto getResponsibleUser() {
-        //TODO связь с сервисом пользователя и получение данных из него
         return UserDto.builder()
-                .id(this.responsibleUserId)
+                .id(this.responsibleUserId.getId())
+                .name(this.responsibleUserId.getName())
+                .surname(this.responsibleUserId.getSurname())
+                .patronymic(this.responsibleUserId.getPatronymic())
+                .username(this.responsibleUserId.getUsername())
                 .build();
     }
 
@@ -146,6 +159,9 @@ public class Task {
         return dateToStr(this.updatedAt);
     }
 
+    /*
+    Я посмотрел реализации, если делать константой, то будут проблемы с коллекциями основанными на мапах.
+    В итоге реализация как у ломбок довольно монструозная https://projectlombok.org/features/EqualsAndHashCode, но вроде как решает такие проблемы
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
@@ -157,7 +173,7 @@ public class Task {
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
         return Objects.equals(id, task.id);
-    }
+    }*/
 
     @Override
     public String toString() {

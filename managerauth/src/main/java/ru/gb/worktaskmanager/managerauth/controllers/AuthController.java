@@ -14,12 +14,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.gb.worktaskmanager.managerauth.converters.UserToDtoConverter;
+import ru.gb.worktaskmanager.managerauth.entities.Roles;
+import ru.gb.worktaskmanager.managerauth.entities.Users;
 import ru.gb.worktaskmanager.managerauth.exceptions.AppError;
 import ru.gb.worktaskmanager.managerauth.jwt.JwtRequest;
 import ru.gb.worktaskmanager.managerauth.jwt.JwtResponse;
 import ru.gb.worktaskmanager.managerauth.services.UserService;
 import ru.gb.worktaskmanager.managerauth.utils.JwtTokenUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping
@@ -27,7 +32,6 @@ import ru.gb.worktaskmanager.managerauth.utils.JwtTokenUtil;
 @Tag(name = "Аутентификация", description = "Методы создания токена и аутентификации")
 public class AuthController {
     private final UserService userService;
-    private final UserToDtoConverter userToDtoConverter;
     private final JwtTokenUtil jwtTokenUtil;
     private final AuthenticationManager authenticationManager;
 
@@ -48,6 +52,7 @@ public class AuthController {
         }
         UserDetails userDetails = userService.loadUserByUsername(authRequest.getUsername());
         String token = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtResponse(token));
+        Users user = userService.findUserByUserName(authRequest.getUsername());
+        return ResponseEntity.ok(new JwtResponse(token, user.getId()));
     }
 }

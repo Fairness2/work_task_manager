@@ -1,5 +1,5 @@
 
-angular.module('taskmanager').controller('registerController', function ($scope, $rootScope, $http, $location) {
+angular.module('taskmanager').controller('registerController', function ($scope,$rootScope, $http, $location) {
 
     $scope.registerNewUser = function () {
         $http.post('http://localhost:5555/auth/register', $scope.newUser)
@@ -8,9 +8,9 @@ angular.module('taskmanager').controller('registerController', function ($scope,
             });
     }
 
-    $rootScope.isFieldsOk = function () {
-        if (($scope.newUser.password !== '' && $scope.newUser.confirmPassword !== '' && $scope.newUser.username !== '') &&
-            ($scope.newUser.password === $scope.newUser.confirmPassword)) {
+    $rootScope.isFieldsRegisterOk = function () {
+        if ($scope.newUser.password !== '' && $scope.newUser.confirmPassword !== '' && $scope.newUser.username !== '' &&
+            $scope.newUser.password === $scope.newUser.confirmPassword) {
             return true;
         } else {
             return false;
